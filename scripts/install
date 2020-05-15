@@ -81,13 +81,9 @@ ynh_app_setting_set --app=$app --key=port --value=$port
 ynh_script_progression --message="Installing mailisearch..." --time --weight=1
 
 arch=$(ynh_detect_arch)
-url=""
-if [ $arch = "amd64" ]
+
+if [ $arch != "amd64" ] || [ $arch != "armv8" ]
 then
-    url="meilisearch-linux-amd64"
-elif [ $arch = "armv8"]
-    url="meilisearch-linux-armv8"
-else
     ynh_die --message="Your OS Architecture is not supported"
 fi
 
