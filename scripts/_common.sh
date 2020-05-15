@@ -2,8 +2,24 @@
 
 latest="v0.10.1"
 
+ynh_detect_arch(){
+	local architecture
+	if [ -n "$(uname -m | grep arm64)" ] || [ -n "$(uname -m | grep arm)" ]; then
+		architecture="armv8"
+	elif [ -n "$(uname -m | grep 64)" ]; then
+		architecture="amd64"
+	elif [ -n "$(uname -m | grep 86)" ]; then
+		architecture="i386"
+	elif [ -n "$(uname -m | grep arm)" ]; then
+		architecture="arm"
+	else
+		architecture="unknown"
+	fi
+	echo $architecture
+}
+
 installation_mailisearch() {
-    arch=$()
+    arch=$(ynh_detect_arch)
     url=""
     if [[ $arch = "amd64" ]]
     then
