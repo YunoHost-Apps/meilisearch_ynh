@@ -55,7 +55,7 @@
         "name": "master_key",
         "ask": {
           "en": "Choose a master API key for Meilisearch",
-          "fr": "Choisissez un nom de domaine pour Meilisearch"
+          "fr": "Choisissez une clef d'API pour Meilisearch"
         },
         "example": "API-key245678635248795"
       },
