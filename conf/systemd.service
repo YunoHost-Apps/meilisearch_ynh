@@ -1,0 +1,13 @@
+[Unit]
+Description=Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
+After=systemd-user-sessions.service
+
+[Service]
+Type=simple
+User=__APP__
+Group=__APP__
+WorkingDirectory=__FINALPATH__/
+ExecStart=/usr/bin/mailisearch --http-addr 127.0.0.1:__PORT__ --env production --master-key __API_KEY__
+
+[Install]
+WantedBy=multi-user.target
