@@ -18,7 +18,7 @@ ynh_detect_arch(){
 	echo $architecture
 }
 
-installation_mailisearch() {
+installation_mailisearch(){
     arch=$(ynh_detect_arch)
     url=""
     if [[ $arch = "amd64" ]]
