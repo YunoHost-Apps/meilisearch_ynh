@@ -2,7 +2,7 @@
 
 latest="v0.10.1"
 
-ynh_detect_arch(){
+ynh_detect_arch() {
 	local architecture
 	if [ -n "$(uname -m | grep arm64)" ] || [ -n "$(uname -m | grep arm)" ]; then
 		architecture="armv8"
@@ -18,9 +18,9 @@ ynh_detect_arch(){
 	echo $architecture
 }
 
-installation_mailisearch(){
-    arch=$(ynh_detect_arch)
-    url=""
+ynh_installation_mailisearch() {
+    local arch=$(ynh_detect_arch)
+    local url=""
     if [[ $arch = "amd64" ]]
     then
         url="meilisearch-linux-amd64"

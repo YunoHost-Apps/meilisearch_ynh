@@ -103,7 +103,7 @@ ynh_add_nginx_config
 #=================================================
 ynh_script_progression --message="Upgrading mailisearch..." --time --weight=1
 
-installation_mailisearch
+ynh_installation_mailisearch
 
 #=================================================
 # CREATE DEDICATED USER
