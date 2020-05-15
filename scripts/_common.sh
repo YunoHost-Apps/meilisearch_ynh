@@ -29,8 +29,6 @@ installation_mailisearch() {
     else
         ynh_die --message="Your OS Architecture is not supported"
     fi
-
     curl https://github.com/meilisearch/MeiliSearch/releases/download/$latest/mailisearch-linux-$arch -O mailisearch
     mv mailisearch /usr/bin/mailisearch
-
 }

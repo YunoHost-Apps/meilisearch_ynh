@@ -21,6 +21,8 @@ domain=$(ynh_app_setting_get --app=$app --key=domain)
 path_url=$(ynh_app_setting_get --app=$app --key=path)
 is_public=$(ynh_app_setting_get --app=$app --key=is_public)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
+master_key=$(ynh_app_setting_get --app=$app --key=master_key)
+$port=$(ynh_app_setting_get --app=$app --key=final_path)
 
 #=================================================
 # CHECK VERSION
@@ -48,6 +50,16 @@ if [ -z "$final_path" ]; then
 	final_path=/var/www/$app
 	ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 fi
+
+#=================================================
+# FIND AND OPEN A PORT
+#=================================================
+
+ynh_script_progression --message="Configuring firewall..." --time --weight=1
+
+# Find an available port
+port=$(ynh_find_port --port=8095)
+ynh_app_setting_set --app=$app --key=port --value=$port
 
 #=================================================
 # BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
@@ -79,18 +91,6 @@ ynh_script_progression --message="Stopping a systemd service..." --time --weight
 ynh_systemd_action --service_name=$app --action="stop" --log_path="/var/log/$app/$app.log"
 
 #=================================================
-# DOWNLOAD, CHECK AND UNPACK SOURCE
-#=================================================
-
-if [ "$upgrade_type" == "UPGRADE_APP" ]
-then
-	ynh_script_progression --message="Upgrading source files..." --time --weight=1
-
-	# Download, check integrity, uncompress and patch the source from app.src
-	ynh_setup_source --dest_dir="$final_path"
-fi
-
-#=================================================
 # NGINX CONFIGURATION
 #=================================================
 ynh_script_progression --message="Upgrading nginx web server configuration..." --time --weight=1
@@ -99,11 +99,11 @@ ynh_script_progression --message="Upgrading nginx web server configuration..." -
 ynh_add_nginx_config
 
 #=================================================
-# UPGRADE DEPENDENCIES
+# UPGRADING MAILISEARCH
 #=================================================
-ynh_script_progression --message="Upgrading dependencies..." --time --weight=1
+ynh_script_progression --message="Upgrading mailisearch..." --time --weight=1
 
-ynh_install_app_dependencies $pkg_dependencies
+installation_mailisearch
 
 #=================================================
 # CREATE DEDICATED USER
@@ -114,25 +114,9 @@ ynh_script_progression --message="Making sure dedicated system user exists..." -
 ynh_system_user_create --username=$app
 
 #=================================================
-# PHP-FPM CONFIGURATION
-#=================================================
-ynh_script_progression --message="Upgrading php-fpm configuration..." --time --weight=1
-
-# Create a dedicated php-fpm config
-ynh_add_fpm_config
-
-#=================================================
-# SPECIFIC UPGRADE
-#=================================================
-# ...
-#=================================================
-
-#=================================================
 # STORE THE CONFIG FILE CHECKSUM
 #=================================================
 
-### Verify the checksum of a file, stored by `ynh_store_file_checksum` in the install script.
-### And create a backup of this file if the checksum is different. So the file will be backed up if the admin had modified it.
 ynh_backup_if_checksum_is_different --file="$final_path/CONFIG_FILE"
 # Recalculate and store the checksum of the file for the next upgrade.
 ynh_store_file_checksum --file="$final_path/CONFIG_FILE"
@@ -148,7 +132,10 @@ ynh_use_logrotate --non-append
 #=================================================
 # SETUP SYSTEMD
 #=================================================
-ynh_script_progression --message="Upgrading systemd configuration..." --time --weight=1
+ynh_script_progression --message="Configuring a systemd service..." --time --weight=1
+
+ynh_replace_string "__PORT__" "$port" "conf/systemd.service"
+ynh_replace_string "__API_KEY__" "$master_key" "conf/systemd.service"
 
 # Create a dedicated systemd config
 ynh_add_systemd_config

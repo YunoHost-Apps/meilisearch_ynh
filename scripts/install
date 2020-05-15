@@ -46,7 +46,8 @@ if [ $i_data_path -ne 0 ]
 then
     test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
 else
-    test ! -e "$data_path" || ynh_die --message="This path already contains a folder"
+    test ! -e "$data_path" || mkdir "$data_path"
+    final_path=$data_path
 fi
 
 # Register (book) web path
@@ -61,6 +62,7 @@ ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
 ynh_app_setting_set --app=$app --key=master_key --value=$master_key
 ynh_app_setting_set --app=$app --key=is_public --value=$is_public
+ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 
 #=================================================
 # STANDARD MODIFICATIONS
@@ -105,53 +107,11 @@ ynh_system_user_create --username=$app
 #=================================================
 ynh_script_progression --message="Configuring a systemd service..." --time --weight=1
 
-### `ynh_systemd_config` is used to configure a systemd script for an app.
-### It can be used for apps that use sysvinit (with adaptation) or systemd.
-### Have a look at the app to be sure this app needs a systemd script.
-### `ynh_systemd_config` will use the file conf/systemd.service
-### If you're not using these lines:
-###		- You can remove those files in conf/.
-###		- Remove the section "BACKUP SYSTEMD" in the backup script
-###		- Remove also the section "STOP AND REMOVE SERVICE" in the remove script
-###		- As well as the section "RESTORE SYSTEMD" in the restore script
-###		- And the section "SETUP SYSTEMD" in the upgrade script
-
 ynh_replace_string "__PORT__" "$port" "conf/systemd.service"
-ynh_replace_string "__PORT__" "$port" "conf/systemd.service"
+ynh_replace_string "__API_KEY__" "$master_key" "conf/systemd.service"
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
-
-#=================================================
-# SETUP APPLICATION WITH CURL
-#=================================================
-
-### Use these lines only if the app installation needs to be finalized through
-### web forms. We generally don't want to ask the final user,
-### so we're going to use curl to automatically fill the fields and submit the
-### forms.
-
-# Set right permissions for curl install
-chown -R $app: $final_path
-
-# Set the app as temporarily public for curl call
-ynh_script_progression --message="Configuring SSOwat..." --time --weight=1
-ynh_app_setting_set --app=$app --key=skipped_uris --value="/"
-# Reload SSOwat config
-yunohost app ssowatconf
-
-# Reload Nginx
-ynh_systemd_action --service_name=nginx --action=reload
-
-# Installation with curl
-ynh_script_progression --message="Finalizing installation..." --time --weight=1
-ynh_local_curl "/INSTALL_PATH" "key1=value1" "key2=value2" "key3=value3"
-
-# Remove the public access
-if [ $is_public -eq 0 ]
-then
-	ynh_app_setting_delete --app=$app --key=skipped_uris
-fi
 
 #=================================================
 # GENERIC FINALIZATION
@@ -173,14 +133,6 @@ ynh_use_logrotate
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
 #=================================================
-
-### `yunohost service add` integrates a service in YunoHost. It then gets
-### displayed in the admin interface and through the others `yunohost service` commands.
-### (N.B. : this line only makes sense if the app adds a service to the system!)
-### If you're not using these lines:
-###		- You can remove these files in conf/.
-###		- Remove the section "REMOVE SERVICE FROM ADMIN PANEL" in the remove script
-###		- As well as the section "ADVERTISE SERVICE IN ADMIN PANEL" in the restore script
 
 yunohost service add $app --description "A short description of the app" --log "/var/log/$app/$app.log"
 
