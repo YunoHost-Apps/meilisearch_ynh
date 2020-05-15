@@ -82,7 +82,7 @@ ynh_script_progression --message="Installing mailisearch..." --time --weight=1
 
 arch=$(ynh_detect_arch)
 
-if [ $arch != "amd64" ] || [ $arch != "armv8" ]
+if [ "$arch" != "amd64" ] || [ "$arch" != "armv8" ]
 then
     ynh_die --message="Your OS Architecture is not supported"
 fi
