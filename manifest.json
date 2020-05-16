@@ -53,6 +53,7 @@
       },
       {
         "name": "master_key",
+        "type": "string",
         "ask": {
           "en": "Choose a master API key for Meilisearch",
           "fr": "Choisissez une clef d'API pour Meilisearch"
