@@ -22,7 +22,7 @@ path_url=$(ynh_app_setting_get --app=$app --key=path)
 is_public=$(ynh_app_setting_get --app=$app --key=is_public)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 master_key=$(ynh_app_setting_get --app=$app --key=master_key)
-$port=$(ynh_app_setting_get --app=$app --key=final_path)
+allow_analyse=$(ynh_app_setting_get --app=$app --key=allow_analyse)
 
 #=================================================
 # CHECK VERSION
@@ -134,6 +134,11 @@ ynh_use_logrotate --non-append
 #=================================================
 ynh_script_progression --message="Configuring a systemd service..." --time --weight=1
 
+if [ $allow_analyse ]; then
+    ynh_replace_string "__ANALYTICS__" "false" "../conf/systemd.service"
+else
+    ynh_replace_string "__ANALYTICS__" "true" "../conf/systemd.service"
+fi
 ynh_replace_string "__PORT__" "$port" "conf/systemd.service"
 ynh_replace_string "__API_KEY__" "$master_key" "conf/systemd.service"
 

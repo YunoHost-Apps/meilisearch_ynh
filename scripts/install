@@ -28,7 +28,7 @@ domain=$YNH_APP_ARG_DOMAIN
 path_url=$YNH_APP_ARG_PATH
 is_public=$YNH_APP_ARG_IS_PUBLIC
 master_key=$YNH_APP_ARG_MASTER_KEY
-data_path=$YNH_APP_ARG_DATA_PATH
+allow_analyse=$YNH_APP_ARG_ALLOW_ANALYSE
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -41,15 +41,8 @@ ynh_script_progression --message="Validating installation parameters..." --time 
 
 final_path=/var/www/$app
 
-if [ $data_path != "" ];then
-    test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
-    mkdir -p $final_path
-else
-    test ! -e "$data_path" || mkdir "$data_path"
-    final_path=$data_path
-fi
-
-
+test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
+mkdir -p $final_path
 
 # Register (book) web path
 ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
@@ -64,6 +57,7 @@ ynh_app_setting_set --app=$app --key=path --value=$path_url
 ynh_app_setting_set --app=$app --key=master_key --value=$master_key
 ynh_app_setting_set --app=$app --key=is_public --value=$is_public
 ynh_app_setting_set --app=$app --key=final_path --value=$final_path
+ynh_app_setting_set --app=$app --key=allow_analyse --value=$allow_analyse
 
 #=================================================
 # STANDARD MODIFICATIONS
@@ -89,9 +83,10 @@ if [ "$arch" != "amd64" ] && [ "$arch" != "armv8" ]
 then
     ynh_die --message="Your OS Architecture is not supported"
 fi
-
-curl https://github.com/meilisearch/MeiliSearch/releases/download/$latest/mailisearch-linux-$arch -o mailisearch
-mv mailisearch /usr/bin/mailisearch
+$release_file=meilisearch-linux-$arch
+curl -OL https://github.com/meilisearch/MeiliSearch/releases/download/$latest/meilisearch-linux-$arch
+chmod +x "$release_file"
+mv "$release_file" /usr/bin/mailisearch
 
 
 #=================================================
@@ -117,6 +112,11 @@ ynh_system_user_create --username=$app
 #=================================================
 ynh_script_progression --message="Configuring a systemd service..." --time --weight=1
 
+if [ $allow_analyse ]; then
+    ynh_replace_string "__ANALYTICS__" "false" "../conf/systemd.service"
+else
+    ynh_replace_string "__ANALYTICS__" "true" "../conf/systemd.service"
+fi
 ynh_replace_string "__PORT__" "$port" "../conf/systemd.service"
 ynh_replace_string "__API_KEY__" "$master_key" "../conf/systemd.service"
 
