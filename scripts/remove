@@ -48,6 +48,7 @@ ynh_remove_systemd_config
 ynh_script_progression --message="Removing Meilisearch binary" --time --weight=1
 
 ynh_secure_remove --file=/usr/bin/meilisearch
+ynh_secure_remove --file=$final_path
 
 #=================================================
 # REMOVE NGINX CONFIGURATION
