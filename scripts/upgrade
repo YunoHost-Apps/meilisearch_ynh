@@ -99,11 +99,20 @@ ynh_script_progression --message="Upgrading nginx web server configuration..." -
 ynh_add_nginx_config
 
 #=================================================
-# UPGRADING MAILISEARCH
+# UPGRADING MEILISEARCH
 #=================================================
-ynh_script_progression --message="Upgrading mailisearch..." --time --weight=1
+ynh_script_progression --message="upgrading meilisearch..." --time --weight=1
 
-ynh_installation_mailisearch
+arch=$(ynh_detect_arch)
+
+if [ "$arch" != "amd64" ] && [ "$arch" != "armv8" ]
+then
+    ynh_die --message="Your OS Architecture is not supported"
+fi
+release_file=meilisearch-linux-$arch
+curl -OL https://github.com/meilisearch/MeiliSearch/releases/download/$latest/meilisearch-linux-$arch
+chmod +x "$release_file"
+mv "$release_file" /usr/bin/meilisearch
 
 #=================================================
 # CREATE DEDICATED USER
