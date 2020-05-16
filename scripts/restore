@@ -59,6 +59,24 @@ ynh_script_progression --message="Restoring the app main directory..." --time --
 ynh_restore_file --origin_path="$final_path"
 
 #=================================================
+# RESTORE Meilisearch
+#=================================================
+
+ynh_script_progression --message="Download again binary for the API." --time --weight=1
+
+arch=$(ynh_detect_arch)
+
+if [ "$arch" != "amd64" ] && [ "$arch" != "armv8" ]
+then
+    ynh_die --message="Your OS Architecture is not supported"
+fi
+
+release_file=meilisearch-linux-$arch
+curl -OL https://github.com/meilisearch/MeiliSearch/releases/download/$latest/meilisearch-linux-$arch
+chmod +x "$release_file"
+mv "$release_file" /usr/bin/meilisearch
+
+#=================================================
 # RECREATE THE DEDICATED USER
 #=================================================
 ynh_script_progression --message="Recreating the dedicated system user..." --time --weight=1
