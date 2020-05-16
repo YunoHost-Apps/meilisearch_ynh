@@ -42,20 +42,20 @@ ynh_script_progression --message="Stopping and removing the systemd service..." 
 ynh_remove_systemd_config
 
 #=================================================
+# REMOVE SERVICE INTEGRATION IN YUNOHOST
+#=================================================
+
+ynh_script_progression --message="Removing Meilisearch binary" --time --weight=1
+
+ynh_secure_remove --file=/usr/bin/meilisearch
+
+#=================================================
 # REMOVE NGINX CONFIGURATION
 #=================================================
 ynh_script_progression --message="Removing nginx web server configuration..." --time --weight=1
 
 # Remove the dedicated nginx config
 ynh_remove_nginx_config
-
-#=================================================
-# REMOVE PHP-FPM CONFIGURATION
-#=================================================
-ynh_script_progression --message="Removing php-fpm configuration..." --time --weight=1
-
-# Remove the dedicated php-fpm config
-ynh_remove_fpm_config
 
 #=================================================
 # REMOVE LOGROTATE CONFIGURATION
