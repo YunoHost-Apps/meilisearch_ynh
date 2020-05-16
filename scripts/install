@@ -83,7 +83,7 @@ if [ "$arch" != "amd64" ] && [ "$arch" != "armv8" ]
 then
     ynh_die --message="Your OS Architecture is not supported"
 fi
-$release_file=meilisearch-linux-$arch
+release_file=meilisearch-linux-$arch
 curl -OL https://github.com/meilisearch/MeiliSearch/releases/download/$latest/meilisearch-linux-$arch
 chmod +x "$release_file"
 mv "$release_file" /usr/bin/mailisearch
