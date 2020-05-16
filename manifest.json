@@ -8,7 +8,7 @@
   },
   "version": "0.10.1~ynh1",
   "url": "https://www.meilisearch.com/",
-  "license": "free",
+  "license": "GPL-3.0",
   "maintainer": {
     "name": "Julien Gomes Dias",
     "email": "abld@abld.info",
