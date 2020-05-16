@@ -37,7 +37,7 @@ final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 # CHECK IF THE APP CAN BE RESTORED
 #=================================================
 ynh_script_progression --message="Validating restoration parameters..." --time --weight=1
-if [ $
+
 ynh_webpath_available --domain=$domain --path_url=$path_url \
 	|| ynh_die --message="Path not available: ${domain}${path_url}"
 test ! -d $final_path \
