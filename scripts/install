@@ -65,7 +65,7 @@ ynh_app_setting_set --app=$app --key=allow_analyse --value=$allow_analyse
 # FIND AND OPEN A PORT
 #=================================================
 
-ynh_script_progression --message="Configuring firewall..." --time --weight=1
+ynh_script_progression --message="Configuring firewall..." --time --weight=2
 
 # Find an available port
 port=$(ynh_find_port --port=8095)
@@ -75,7 +75,7 @@ ynh_app_setting_set --app=$app --key=port --value=$port
 # DOWNLOAD AND INSTALL MEILISEARCH
 #=================================================
 
-ynh_script_progression --message="Installing meilisearch..." --time --weight=1
+ynh_script_progression --message="Installing meilisearch..." --time --weight=5
 
 arch=$(ynh_detect_arch)
 
@@ -110,7 +110,7 @@ ynh_system_user_create --username=$app
 #=================================================
 # SETUP SYSTEMD
 #=================================================
-ynh_script_progression --message="Configuring a systemd service..." --time --weight=1
+ynh_script_progression --message="Configuring a systemd service..." --time --weight=2
 
 if [ $allow_analyse ]; then
     ynh_replace_string "__ANALYTICS__" "false" "../conf/systemd.service"
@@ -157,10 +157,10 @@ ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$ap
 #=================================================
 # SETUP FAIL2BAN
 #=================================================
-ynh_script_progression --message="Configuring fail2ban..." --time --weight=1
-
-# Create a dedicated fail2ban config
-ynh_add_fail2ban_config --logpath="/var/log/nginx/${domain}-error.log" --failregex="Regex to match into the log for a failed login"
+#ynh_script_progression --message="Configuring fail2ban..." --time --weight=1
+#
+## Create a dedicated fail2ban config
+#ynh_add_fail2ban_config --logpath="/var/log/nginx/${domain}-error.log" --failregex="Regex to match into the log for a failed login"
 
 #=================================================
 # SETUP SSOWAT

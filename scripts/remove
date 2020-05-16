@@ -53,7 +53,7 @@ ynh_secure_remove --file=$final_path
 #=================================================
 # REMOVE NGINX CONFIGURATION
 #=================================================
-ynh_script_progression --message="Removing nginx web server configuration..." --time --weight=1
+ynh_script_progression --message="Removing nginx web server configuration..." --time --weight=3
 
 # Remove the dedicated nginx config
 ynh_remove_nginx_config
@@ -61,7 +61,7 @@ ynh_remove_nginx_config
 #=================================================
 # REMOVE LOGROTATE CONFIGURATION
 #=================================================
-ynh_script_progression --message="Removing logrotate configuration..." --time --weight=1
+ynh_script_progression --message="Removing logrotate configuration..." --time
 
 # Remove the app-specific logrotate config
 ynh_remove_logrotate
@@ -79,17 +79,17 @@ fi
 #=================================================
 # REMOVE FAIL2BAN CONFIGURATION
 #=================================================
-ynh_script_progression --message="Removing fail2ban configuration..." --time --weight=1
+#ynh_script_progression --message="Removing fail2ban configuration..." --time --weight=1
 
 # Remove the dedicated fail2ban config
-ynh_remove_fail2ban_config
+#ynh_remove_fail2ban_config
 
 #=================================================
 # GENERIC FINALIZATION
 #=================================================
 # REMOVE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Removing the dedicated system user..." --time --weight=1
+ynh_script_progression --message="Removing the dedicated system user..." --time
 
 # Delete a system user
 ynh_system_user_delete --username=$app
