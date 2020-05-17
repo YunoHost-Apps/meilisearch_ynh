@@ -39,8 +39,8 @@
           "en": "Choose a path for Meilisearch",
           "fr": "Choisissez un chemin pour Meilisearch"
         },
-        "example": "/mailisearch",
-        "default": "/mailisearch"
+        "example": "/meilisearch",
+        "default": "/meilisearch"
       },
       {
         "name": "is_public",
