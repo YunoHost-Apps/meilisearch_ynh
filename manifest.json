@@ -27,20 +27,10 @@
         "name": "domain",
         "type": "domain",
         "ask": {
-          "en": "Choose a domain name for Meilisearch",
-          "fr": "Choisissez un nom de domaine pour Meilisearch"
+          "en": "Choose a dedicated domain name for Meilisearch",
+          "fr": "Choisissez un nom de domaine dédié pour Meilisearch"
         },
         "example": "example.com"
-      },
-      {
-        "name": "path",
-        "type": "path",
-        "ask": {
-          "en": "Choose a path for Meilisearch",
-          "fr": "Choisissez un chemin pour Meilisearch"
-        },
-        "example": "/meilisearch",
-        "default": "/meilisearch"
       },
       {
         "name": "is_public",

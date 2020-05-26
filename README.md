@@ -23,6 +23,8 @@ Meilisearch is an opensource next generation search API.
 
 At the installation, be sure to set up an API key to secure your API.
 
+## Problem and todo
+- Doesn't install on subpath (WIP).
 
 #### Multi-users support
 
