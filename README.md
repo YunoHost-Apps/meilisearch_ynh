@@ -1,6 +1,7 @@
-# Meilisearch app for YunoHost
+# Meilisearch for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/meilisearch.svg)](https://dash.yunohost.org/appci/app/meilisearch) ![](https://ci-apps.yunohost.org/ci/badges/meilisearch.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/meilisearch.maintain.svg)  [![Install Meilisearch with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=meilisearch)
+[![Integration level](https://dash.yunohost.org/integration/meilisearch.svg)](https://dash.yunohost.org/appci/app/meilisearch) ![](https://ci-apps.yunohost.org/ci/badges/meilisearch.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/meilisearch.maintain.svg)  
+[![Install Meilisearch with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=meilisearch)
 
 *[Lire ce readme en français.](./README_fr.md)*
 
