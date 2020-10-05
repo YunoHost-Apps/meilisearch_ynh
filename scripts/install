@@ -36,7 +36,7 @@ app=$YNH_APP_INSTANCE_NAME
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
 
-ynh_script_progression --message="Validating installation parameters..." --time --weight=1
+ynh_script_progression --message="Validating installation parameters..." --weight=1
 
 
 final_path=/var/www/$app
@@ -50,7 +50,7 @@ ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
-ynh_script_progression --message="Storing installation settings..." --time --weight=1
+ynh_script_progression --message="Storing installation settings..." --weight=1
 
 ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
@@ -65,7 +65,7 @@ ynh_app_setting_set --app=$app --key=allow_analyse --value=$allow_analyse
 # FIND AND OPEN A PORT
 #=================================================
 
-ynh_script_progression --message="Configuring firewall..." --time --weight=2
+ynh_script_progression --message="Configuring firewall..." --weight=2
 
 # Find an available port
 port=$(ynh_find_port --port=8095)
@@ -74,7 +74,7 @@ ynh_app_setting_set --app=$app --key=port --value=$port
 #=================================================
 # DOWNLOAD AND INSTALL MEILISEARCH
 #=================================================
-ynh_script_progression --message="Installing meilisearch..." --time --weight=5
+ynh_script_progression --message="Installing meilisearch..." --weight=5
 
 arch=$(ynh_detect_arch)
 
@@ -90,7 +90,7 @@ mv "$release_file" /usr/bin/meilisearch
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
-ynh_script_progression --message="Configuring nginx web server..." --time --weight=1
+ynh_script_progression --message="Configuring NGINX web server..." --weight=8
 
 ### `ynh_add_nginx_config` will use the file conf/nginx.conf
 
@@ -100,7 +100,7 @@ ynh_add_nginx_config
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Configuring system user..." --time --weight=1
+ynh_script_progression --message="Configuring system user..." --weight=1
 
 # Create a system user
 ynh_system_user_create --username=$app
@@ -108,7 +108,7 @@ ynh_system_user_create --username=$app
 #=================================================
 # SETUP SYSTEMD
 #=================================================
-ynh_script_progression --message="Configuring a systemd service..." --time --weight=2
+ynh_script_progression --message="Configuring a systemd service..." --weight=2
 
 if [ $allow_analyse ]; then
     ynh_replace_string "__ANALYTICS__" "false" "../conf/systemd.service"
@@ -133,7 +133,7 @@ chown -R $app:$app $final_path
 #=================================================
 # SETUP LOGROTATE
 #=================================================
-ynh_script_progression --message="Configuring log rotation..." --time --weight=1
+ynh_script_progression --message="Configuring log rotation..." --weight=1
 
 # Use logrotate to manage application logfile(s)
 ynh_use_logrotate
@@ -142,7 +142,7 @@ ynh_use_logrotate
 # INTEGRATE SERVICE IN YUNOHOST
 #=================================================
 
-yunohost service add $app --description "A short description of the app" --log "/var/log/$app/$app.log"
+yunohost service add $app --description "Opensource next generation search API" --log "/var/log/$app/$app.log"
 
 #=================================================
 # START SYSTEMD SERVICE
@@ -175,7 +175,7 @@ fi
 #=================================================
 # RELOAD NGINX
 #=================================================
-ynh_script_progression --message="Reloading nginx web server..." --time --weight=1
+ynh_script_progression --message="Reloading NGINX web server..." --weight=2
 
 ynh_systemd_action --service_name=nginx --action=reload
 
@@ -183,4 +183,4 @@ ynh_systemd_action --service_name=nginx --action=reload
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Installation of $app completed" --time --last
+ynh_script_progression --message="Installation of Meilisearch completed" --last

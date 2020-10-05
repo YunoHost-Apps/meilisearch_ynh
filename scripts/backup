@@ -15,7 +15,6 @@ source /usr/share/yunohost/helpers
 #=================================================
 
 ynh_clean_setup () {
-	### Remove this function if there's nothing to clean before calling the remove script.
 	true
 }
 # Exit if an error occurs during the execution of the script
@@ -24,7 +23,7 @@ ynh_abort_if_errors
 #=================================================
 # LOAD SETTINGS
 #=================================================
-ynh_script_progression --message="Loading installation settings..." --time --weight=1
+ynh_print_info --message="Loading installation settings..."
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -56,8 +55,6 @@ ynh_backup --src_path="/etc/fail2ban/jail.d/$app.conf"
 ynh_backup --src_path="/etc/fail2ban/filter.d/$app.conf"
 
 #=================================================
-# SPECIFIC BACKUP
-#=================================================
 # BACKUP LOGROTATE
 #=================================================
 
@@ -73,4 +70,4 @@ ynh_backup --src_path="/etc/systemd/system/$app.service"
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Backup script completed for $app. (YunoHost will then actually copy those files to the archive)." --time --last
+ynh_print_info --message="Backup script completed for Meilisearch. (YunoHost will then actually copy those files to the archive)." --time --last

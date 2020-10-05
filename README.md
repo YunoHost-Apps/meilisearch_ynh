@@ -16,7 +16,7 @@ Meilisearch is an opensource next generation search API.
 
 ## Screenshots
 
-![Meilisearch Demo](movies-web-demo.gif)
+![](movies-web-demo.gif)
 
 ## Configuration
 
@@ -46,11 +46,7 @@ It's an API and there is no authentification, without API key.
 
 ## Developers info
 
-<<<<<<< Updated upstream
 Please do your pull request to the [testing branch](https://github.com/YunoHost-Apps/meilisearch_ynh/tree/testing).
-=======
-Please do your pull request to the [testing branch](https://github.com/frju365/meilisearch_ynh/tree/testing).
->>>>>>> Stashed changes
 
 To try the testing branch, please proceed like that.
 ```
