@@ -74,7 +74,6 @@ ynh_app_setting_set --app=$app --key=port --value=$port
 #=================================================
 # DOWNLOAD AND INSTALL MEILISEARCH
 #=================================================
-
 ynh_script_progression --message="Installing meilisearch..." --time --weight=5
 
 arch=$(ynh_detect_arch)
@@ -87,7 +86,6 @@ release_file=meilisearch-linux-$arch
 curl -OL https://github.com/meilisearch/MeiliSearch/releases/download/$latest/meilisearch-linux-$arch
 chmod +x "$release_file"
 mv "$release_file" /usr/bin/meilisearch
-
 
 #=================================================
 # NGINX CONFIGURATION
