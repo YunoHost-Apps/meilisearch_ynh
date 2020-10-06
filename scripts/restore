@@ -62,7 +62,7 @@ ynh_restore_file --origin_path="$final_path"
 # RESTORE Meilisearch
 #=================================================
 
-ynh_script_progression --message="Download again binary for the API." --time --weight=5
+ynh_script_progression --message="Download again binary for the API." --weight=5
 
 arch=$(ynh_detect_arch)
 
