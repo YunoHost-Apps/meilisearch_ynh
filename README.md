@@ -12,11 +12,11 @@ If you don't have YunoHost, please see [here](https://yunohost.org/#/install) to
 
 Meilisearch is an opensource next generation search API.
 
-**Shipped version:** 0.10.1
+**Shipped version:** 0.15.0
 
 ## Screenshots
 
-![Meilisearch Demo](movies-web-demo.gif)
+![](movies-web-demo.gif)
 
 ## Configuration
 
@@ -44,8 +44,7 @@ It's an API and there is no authentification, without API key.
 
 ---
 
-Developers info
-----------------
+## Developers info
 
 Please do your pull request to the [testing branch](https://github.com/YunoHost-Apps/meilisearch_ynh/tree/testing).
 
