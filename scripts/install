@@ -74,7 +74,7 @@ ynh_app_setting_set --app=$app --key=port --value=$port
 #=================================================
 # DOWNLOAD AND INSTALL MEILISEARCH
 #=================================================
-ynh_script_progression --message="Installing meilisearch..." --weight=5
+ynh_script_progression --message="Installing Meilisearch..." --weight=5
 
 arch=$(ynh_detect_arch)
 
@@ -147,7 +147,7 @@ yunohost service add $app --description "Opensource next generation search API" 
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting a systemd service..." --time --weight=1
+ynh_script_progression --message="Starting a systemd service..." --weight=1
 
 # Start a systemd service
 ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
@@ -163,7 +163,7 @@ ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$ap
 #=================================================
 # SETUP SSOWAT
 #=================================================
-ynh_script_progression --message="Configuring SSOwat..." --time --weight=1
+ynh_script_progression --message="Configuring SSOwat..." --weight=1
 
 # Make app public if necessary
 if [ $is_public -eq 1 ]
