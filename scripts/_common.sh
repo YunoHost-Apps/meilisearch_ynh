@@ -1,6 +1,6 @@
 #!/bin/bash
 
-latest="v0.15.0"
+latest="v0.17.0"
 
 ynh_detect_arch() {
 	local architecture

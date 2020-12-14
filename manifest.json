@@ -6,7 +6,7 @@
     "en": "Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine.",
     "fr": "Moteur de recherche rapide, ultra-performant et tolérant aux fautes de frappe."
   },
-  "version": "0.15.0~ynh1",
+  "version": "0.17.0~ynh1",
   "url": "https://www.meilisearch.com/",
   "license": "GPL-3.0",
   "maintainer": {
@@ -15,7 +15,7 @@
     "url": "https://julien.gomes-dias.dev"
   },
   "requirements": {
-    "yunohost": ">= 3.5"
+    "yunohost": ">= 3.8.1"
   },
   "multi_instance": true,
   "services": [
