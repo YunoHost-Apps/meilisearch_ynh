@@ -1,5 +1,5 @@
 [Unit]
-Description=Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
+Description=Meilisearch: Lightning Fast Search Engine
 After=systemd-user-sessions.service
 
 [Service]
