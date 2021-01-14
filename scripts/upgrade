@@ -55,7 +55,7 @@ fi
 # FIND AND OPEN A PORT
 #=================================================
 
-ynh_script_progression --message="Configuring firewall..." --weight=2
+ynh_script_progression --message="Finding an available port.." --weight=2
 
 # Find an available port
 port=$(ynh_find_port --port=8095)
@@ -74,12 +74,6 @@ ynh_clean_setup () {
 }
 # Exit if an error occurs during the execution of the script
 ynh_abort_if_errors
-
-#=================================================
-# CHECK THE PATH
-#=================================================
-
-path_url=$(ynh_normalize_url_path --path_url=$path_url)
 
 #=================================================
 # STANDARD UPGRADE STEPS
