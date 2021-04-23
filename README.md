@@ -12,7 +12,7 @@ If you don't have YunoHost, please see [here](https://yunohost.org/#/install) to
 
 Meilisearch is an opensource next generation search API.
 
-**Shipped version:** 0.18.1
+**Shipped version:** 0.20.0
 
 ## Screenshots
 
@@ -32,8 +32,8 @@ It's an API and there is no authentification, without API key.
 
 #### Supported architectures
 
-* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/meilisearch%20%28Apps%29.svg)](https://ci-apps.yunohost.org/ci/apps/meilisearch/)
-* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/meilisearch%20%28Apps%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/meilisearch/)
+* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/meilisearch.svg)](https://ci-apps.yunohost.org/ci/apps/meilisearch/)
+* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/meilisearch.svg)](https://ci-apps-arm.yunohost.org/ci/apps/meilisearch/)
 
 ## Links
 
