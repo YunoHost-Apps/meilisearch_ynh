@@ -90,6 +90,14 @@ ynh_script_progression --message="Upgrading NGINX web server configuration..." -
 ynh_add_nginx_config
 
 #=================================================
+# CREATE DEDICATED USER
+#=================================================
+ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
+
+# Create a dedicated user (if not existing)
+ynh_system_user_create --username=$app --home_dir="$final_path"
+
+#=================================================
 # UPGRADING MEILISEARCH
 #=================================================
 ynh_script_progression --message="upgrading Meilisearch..." --weight=5
@@ -105,13 +113,9 @@ curl -OL https://github.com/meilisearch/MeiliSearch/releases/download/$latest/me
 chmod +x "$release_file"
 mv "$release_file" /usr/bin/meilisearch
 
-#=================================================
-# CREATE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
-
-# Create a dedicated user (if not existing)
-ynh_system_user_create --username=$app
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
 
 #=================================================
 # STORE THE CONFIG FILE CHECKSUM
@@ -139,28 +143,9 @@ if [ $allow_analyse ]; then
 else
     ynh_replace_string "__ANALYTICS__" "true" "../conf/systemd.service"
 fi
-ynh_replace_string "__PORT__" "$port" "../conf/systemd.service"
-ynh_replace_string "__API_KEY__" "$master_key" "../conf/systemd.service"
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
-
-#=================================================
-# GENERIC FINALIZATION
-#=================================================
-# UPGRADE FAIL2BAN
-#=================================================
-#ynh_script_progression --message="Reconfiguring fail2ban..." --weight=1
-
-# Create a dedicated fail2ban config
-#ynh_add_fail2ban_config --logpath="/var/log/nginx/${domain}-error.log" --failregex="Regex to match into the log for a failed login"
-
-#=================================================
-# SECURE FILES AND DIRECTORIES
-#=================================================
-
-# Set permissions on app files
-chown -R $app:$app $final_path
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
