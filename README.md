@@ -1,7 +1,7 @@
 # Meilisearch for YunoHost
 
 [![Integration level](https://dash.yunohost.org/integration/meilisearch.svg)](https://dash.yunohost.org/appci/app/meilisearch) ![](https://ci-apps.yunohost.org/ci/badges/meilisearch.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/meilisearch.maintain.svg)  
-[![Install Meilisearch with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=meilisearch)
+[![Install Meilisearch with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=meilisearch)
 
 *[Lire ce readme en français.](./README_fr.md)*
 
@@ -12,7 +12,7 @@ If you don't have YunoHost, please see [here](https://yunohost.org/#/install) to
 
 Meilisearch is an opensource next generation search API.
 
-**Shipped version:** 0.15.0
+**Shipped version:** 0.20.0
 
 ## Screenshots
 
@@ -32,8 +32,8 @@ It's an API and there is no authentification, without API key.
 
 #### Supported architectures
 
-* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/meilisearch%20%28Apps%29.svg)](https://ci-apps.yunohost.org/ci/apps/meilisearch/)
-* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/meilisearch%20%28Apps%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/meilisearch/)
+* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/meilisearch.svg)](https://ci-apps.yunohost.org/ci/apps/meilisearch/)
+* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/meilisearch.svg)](https://ci-apps-arm.yunohost.org/ci/apps/meilisearch/)
 
 ## Links
 
