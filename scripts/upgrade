@@ -19,7 +19,6 @@ app=$YNH_APP_INSTANCE_NAME
 
 domain=$(ynh_app_setting_get --app=$app --key=domain)
 path_url=$(ynh_app_setting_get --app=$app --key=path)
-is_public=$(ynh_app_setting_get --app=$app --key=is_public)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 master_key=$(ynh_app_setting_get --app=$app --key=master_key)
 allow_analyse=$(ynh_app_setting_get --app=$app --key=allow_analyse)
@@ -33,17 +32,8 @@ upgrade_type=$(ynh_check_app_version_changed)
 #=================================================
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
-
 ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
 
-# Fix is_public as a boolean value
-if [ "$is_public" = "Yes" ]; then
-	ynh_app_setting_set --app=$app --key=is_public --value=1
-	is_public=1
-elif [ "$is_public" = "No" ]; then
-	ynh_app_setting_set --app=$app --key=is_public --value=0
-	is_public=0
-fi
 
 # If final_path doesn't exist, create it
 if [ -z "$final_path" ]; then
@@ -51,11 +41,18 @@ if [ -z "$final_path" ]; then
 	ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 fi
 
+# Cleaning legacy permissions
+if ynh_legacy_permissions_exists; then
+	ynh_legacy_permissions_delete_all
+
+	ynh_app_setting_delete --app=$app --key=is_public
+fi
+
 #=================================================
 # FIND AND OPEN A PORT
 #=================================================
 
-ynh_script_progression --message="Configuring firewall..." --weight=2
+ynh_script_progression --message="Finding an available port.." --weight=2
 
 # Find an available port
 port=$(ynh_find_port --port=8095)
@@ -76,12 +73,6 @@ ynh_clean_setup () {
 ynh_abort_if_errors
 
 #=================================================
-# CHECK THE PATH
-#=================================================
-
-path_url=$(ynh_normalize_url_path --path_url=$path_url)
-
-#=================================================
 # STANDARD UPGRADE STEPS
 #=================================================
 # STOP SYSTEMD SERVICE
@@ -99,6 +90,14 @@ ynh_script_progression --message="Upgrading NGINX web server configuration..." -
 ynh_add_nginx_config
 
 #=================================================
+# CREATE DEDICATED USER
+#=================================================
+ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
+
+# Create a dedicated user (if not existing)
+ynh_system_user_create --username=$app --home_dir="$final_path"
+
+#=================================================
 # UPGRADING MEILISEARCH
 #=================================================
 ynh_script_progression --message="upgrading Meilisearch..." --weight=5
@@ -110,17 +109,13 @@ then
     ynh_die --message="Your OS Architecture is not supported"
 fi
 release_file=meilisearch-linux-$arch
-curl -OL https://github.com/meilisearch/MeiliSearch/releases/download/$latest/meilisearch-linux-$arch
+curl -sOL https://github.com/meilisearch/MeiliSearch/releases/download/$latest/meilisearch-linux-$arch
 chmod +x "$release_file"
 mv "$release_file" /usr/bin/meilisearch
 
-#=================================================
-# CREATE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
-
-# Create a dedicated user (if not existing)
-ynh_system_user_create --username=$app
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
 
 #=================================================
 # STORE THE CONFIG FILE CHECKSUM
@@ -148,40 +143,15 @@ if [ $allow_analyse ]; then
 else
     ynh_replace_string "__ANALYTICS__" "true" "../conf/systemd.service"
 fi
-ynh_replace_string "__PORT__" "$port" "../conf/systemd.service"
-ynh_replace_string "__API_KEY__" "$master_key" "../conf/systemd.service"
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
 
 #=================================================
-# GENERIC FINALIZATION
-#=================================================
-# UPGRADE FAIL2BAN
-#=================================================
-#ynh_script_progression --message="Reconfiguring fail2ban..." --weight=1
-
-# Create a dedicated fail2ban config
-#ynh_add_fail2ban_config --logpath="/var/log/nginx/${domain}-error.log" --failregex="Regex to match into the log for a failed login"
-
-#=================================================
-# SECURE FILES AND DIRECTORIES
+# INTEGRATE SERVICE IN YUNOHOST
 #=================================================
 
-# Set permissions on app files
-chown -R $app:$app $final_path
-
-#=================================================
-# SETUP SSOWAT
-#=================================================
-ynh_script_progression --message="Upgrading SSOwat configuration..." --weight=1
-
-# Make app public if necessary
-if [ $is_public -eq 1 ]
-then
-	# unprotected_uris allows SSO credentials to be passed anyway
-	ynh_app_setting_set --app=$app --key=unprotected_uris --value="/"
-fi
+yunohost service add $app --description="Opensource next generation search API" --log="/var/log/$app/$app.log"
 
 #=================================================
 # START SYSTEMD SERVICE
