@@ -148,14 +148,6 @@ chmod -R o-rwx "$final_path"
 chown -R $app:www-data "$final_path"
 
 #=================================================
-# STORE THE CONFIG FILE CHECKSUM
-#=================================================
-
-ynh_backup_if_checksum_is_different --file="$final_path/CONFIG_FILE"
-# Recalculate and store the checksum of the file for the next upgrade.
-ynh_store_file_checksum --file="$final_path/CONFIG_FILE"
-
-#=================================================
 # SETUP SYSTEMD
 #=================================================
 ynh_script_progression --message="Configuring a systemd service..." --weight=2
