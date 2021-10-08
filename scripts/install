@@ -35,9 +35,7 @@ app=$YNH_APP_INSTANCE_NAME
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
-
 ynh_script_progression --message="Validating installation parameters..." --weight=1
-
 
 final_path=/var/www/$app
 
@@ -63,7 +61,6 @@ ynh_app_setting_set --app=$app --key=allow_analyse --value=$allow_analyse
 #=================================================
 # FIND AND OPEN A PORT
 #=================================================
-
 ynh_script_progression --message="Finding an available port..." --weight=2
 
 # Find an available port
@@ -145,7 +142,7 @@ ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$ap
 #=================================================
 # SETUP SSOWAT
 #=================================================
-ynh_script_progression --message="Configuring SSOwat..." --weight=1
+ynh_script_progression --message="Configuring permissions..." --weight=1
 
 # Make app public if necessary or protect it
 if [ $is_public -eq 1 ]
