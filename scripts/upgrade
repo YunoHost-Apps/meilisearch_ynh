@@ -23,11 +23,21 @@ final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 master_key=$(ynh_app_setting_get --app=$app --key=master_key)
 allow_analyse=$(ynh_app_setting_get --app=$app --key=allow_analyse)
 
+# Variables used for dumps
+DUMPS_DIR="$(mktemp -d -t meilisearch_dumps.XXXXX)"
+declare -a dump_files=()
+declare -A displayed_attributes=()
+BASE_URL="http://localhost:$port"
+HEADER_API_KEY="X-Meili-API-Key: $master_key"
 #=================================================
 # CHECK VERSION
 #=================================================
 
-upgrade_type=$(ynh_check_app_version_changed)
+if ynh_compare_current_package_version --comparison lt --version 0.15.0~ynh1; then
+  ynh_die --message="Please upgrade from version 0.15 or above"
+else
+  upgrade_type=$(ynh_check_app_version_changed)
+fi
 
 #=================================================
 # BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
@@ -37,8 +47,9 @@ ynh_script_progression --message="Backing up Meilisearch before upgrading (may t
 # Backup the current version of the app
 ynh_backup_before_upgrade
 ynh_clean_setup () {
-	# restore it if the upgrade fails
-	ynh_restore_upgradebackup
+    ynh_secure_remove --file=$DUMPS_DIR
+    # restore it if the upgrade fails
+    ynh_restore_upgradebackup
 }
 # Exit if an error occurs during the execution of the script
 ynh_abort_if_errors
@@ -59,6 +70,33 @@ if ynh_legacy_permissions_exists; then
 	ynh_legacy_permissions_delete_all
 
 	ynh_app_setting_delete --app=$app --key=is_public
+fi
+
+#=================================================
+# DUMP DATA
+#=================================================
+ynh_script_progression --message="Dump the database for migration if application version changed" --weight=1
+if [ "$upgrade_type" == "UPGRADE_APP" ]
+then
+    ynh_print_info --message="Version changed, beginning dumping"
+    ynh_debug --message="Fetching the index ids"
+    indexes_id=$(curl -s -X GET "$BASE_URL/indexes" --header "$HEADER_API_KEY" | jq -r '.[].uid')
+    for index in $indexes_id
+    do
+        # store the displayed_attributes before temporarily removing them
+        displayed_attributes+=([$index]="$(curl --fail --silent -X GET "$BASE_URL/indexes/$index/settings/displayed-attributes" --header "$HEADER_API_KEY")")
+        # Remove the displayed_attributes for the dump:
+        curl --silent --fail -X DELETE "$BASE_URL/indexes/$index/settings/displayed-attributes" --header "$HEADER_API_KEY"
+    done
+    ynh_debug --message="Requesting the Dump"
+    dump_id=$(curl --silent --fail -X POST "$BASE_URL/dumps" --header "$HEADER_API_KEY" | jq -r ".uid")
+    ynh_debug --message="Waiting for dump #$dump_id to be available"
+    while [ "$(curl --silent --fail -X GET "$BASE_URL/dumps/$dump_id/status" --header "$HEADER_API_KEY" | jq -r ".status")" != "done" ]
+    do
+        sleep 5
+    done
+    cp $final_path/dumps/$dump_id.tar.gz $DUMPS_DIR
+    ynh_print_info --message="Dumping done!"
 fi
 
 #=================================================
@@ -89,7 +127,7 @@ ynh_system_user_create --username=$app --home_dir="$final_path"
 #=================================================
 # UPGRADING MEILISEARCH
 #=================================================
-ynh_script_progression --message="upgrading Meilisearch..." --weight=5
+ynh_script_progression --message="Upgrading Meilisearch..." --weight=5
 
 arch=$(ynh_detect_arch)
 
@@ -97,6 +135,7 @@ if [ "$arch" != "amd64" ] && [ "$arch" != "armv8" ]
 then
     ynh_die --message="Your OS Architecture is not supported"
 fi
+
 release_file=meilisearch-linux-$arch
 curl -sOL https://github.com/meilisearch/MeiliSearch/releases/download/$latest/meilisearch-linux-$arch
 chmod +x "$release_file"
@@ -143,6 +182,52 @@ ynh_use_logrotate --non-append
 yunohost service add $app --description="Opensource next generation search API" --log="/var/log/$app/$app.log"
 
 #=================================================
+# IMPORT DUMP
+#=================================================
+ynh_script_progression --message="Import the dump..." --weight=3
+
+if [ "$upgrade_type" == "UPGRADE_APP" ]
+then
+    tmp_dump_logs="$(mktemp -p $DUMPS_DIR)"
+    ynh_debug --message="Running import command"
+    /usr/bin/meilisearch --db-path $DUMPS_DIR/data.ms --import-dump $DUMPS_DIR/$dump_id.tar.gz --master-key $master_key --http-addr 127.0.0.1:$port --no-analytics true &> $tmp_dump_logs &
+    dump_pid=$!
+    dump_timeout=300
+    for i in $(seq $dump_timeout)
+    do
+        if grep --quiet 'Dump importation from ".*" succeed' $tmp_dump_logs;
+        then
+            ynh_debug --message="Importation succeeded"
+            break
+        fi
+        if ! kill -0 $dump_pid &>/dev/null
+        then
+            ynh_die "The dump importation failed: $(cat $tmp_dump_logs)"
+        fi
+        if [ $i -eq 30 ]
+        then
+            ynh_print_warn --message="(Importation may take some time)"
+        fi
+        sleep 1
+    done
+    ynh_debug --message="Restore displayed_attributes"
+    for index in ${!displayed_attributes[*]}
+    do
+        curl --silent --fail -X POST "$BASE_URL/indexes/$index/settings/displayed-attributes" --data "${displayed_attributes[$index]}" --header "$HEADER_API_KEY"
+    done
+    sleep 1 # let meilisearch process the above requests
+    kill -SIGTERM $dump_pid
+    [ $i -eq $dump_timeout ] && ynh_die "The importation failed, abort!"
+    ynh_secure_remove --file=$final_path/data.ms
+    mv $DUMPS_DIR/data.ms $final_path/data.ms
+
+    chmod 750 "$final_path"
+    chmod -R o-rwx "$final_path"
+    chown -R $app:www-data "$final_path"
+    ynh_secure_remove --file=$DUMPS_DIR
+fi
+
+#=================================================
 # START SYSTEMD SERVICE
 #=================================================
 ynh_script_progression --message="Starting a systemd service..." --weight=3
@@ -160,4 +245,4 @@ ynh_systemd_action --service_name=nginx --action=reload
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Upgrade of Meilisearch completed" --last
+ynh_script_progression --message="Upgrade of Meilisearch completed"
