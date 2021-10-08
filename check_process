@@ -27,6 +27,7 @@
 		setup_private=1
 		setup_public=1
 		upgrade=1
+		upgrade=1	from_commit=adb788162e27a843d52582cb03106861e1b17c9c
 		upgrade=1	from_commit=30d48110ea0c820c89ab8ade34e415f07b5b0b86
 		backup_restore=1
 		multi_instance=1
@@ -39,5 +40,8 @@ Email=
 Notification=none
 ;;; Upgrade options
 	; commit=30d48110ea0c820c89ab8ade34e415f07b5b0b86
-		name=Merge pull request #13 from YunoHost-Apps/testing 
+		name=Merge pull request #13 from YunoHost-Apps/testing
+		manifest_arg=domain=DOMAIN&path=PATH&is_public=1&data_path=""&master_key="YUNOHOST-API-KEY-202020201456452135"&
+	; commit=adb788162e27a843d52582cb03106861e1b17c9c
+		name=From Version 0.15.0ynh~1 (Fixes #14)
 		manifest_arg=domain=DOMAIN&path=PATH&is_public=1&data_path=""&master_key="YUNOHOST-API-KEY-202020201456452135"&
