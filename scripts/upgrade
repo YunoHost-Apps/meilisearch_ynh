@@ -192,12 +192,13 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
     tmp_dump_logs="$(mktemp -p $DUMPS_DIR)"
     ynh_debug --message="Running import command"
+    dump=$(find $DUMPS_DIR -name "$dump_id.tar.gz" -o -name "$dump_id.dump" | head -1)
     /usr/bin/meilisearch --db-path $DUMPS_DIR/data.ms --import-dump $DUMPS_DIR/$dump_id.* --master-key $master_key --http-addr 127.0.0.1:$port --no-analytics true &> $tmp_dump_logs &
     dump_pid=$!
     dump_timeout=300
     for i in $(seq $dump_timeout)
     do
-        if grep --quiet 'Dump importation from ".*" succeed' $tmp_dump_logs;
+        if [ "$(curl --silent -X GET "$BASE_URL/health" | jq -r ".status")" == "available" ]
         then
             ynh_debug --message="Importation succeeded"
             break
