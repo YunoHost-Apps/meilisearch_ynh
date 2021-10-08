@@ -180,7 +180,10 @@ yunohost service add $app --description="Opensource next generation search API" 
 #=================================================
 ynh_script_progression --message="Import the dump..." --weight=3
 
-if [ "$upgrade_type" == "UPGRADE_APP" ]
+if [ ${#displayed_attributes[@]} -eq 0 ]
+then
+    ynh_print_warn --message="No index found, database probably empty, skip"
+elif [ "$upgrade_type" == "UPGRADE_APP" ]
 then
     tmp_dump_logs="$(mktemp -p $DUMPS_DIR)"
     ynh_debug --message="Running import command"
