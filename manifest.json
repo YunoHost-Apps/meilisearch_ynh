@@ -42,6 +42,16 @@
         "example": "API-key245678635248795"
       },
       {
+        "name": "environment",
+        "type": "string",
+        "choices": ["development", "production"],
+        "default": "development",
+        "ask": {
+          "en": "Choose whether your instance run in production mode or in development mode (which brings an UI)",
+          "fr": "Choisissez si votre instance tourne en mode production ou développement (lequel offre une interface graphique)"
+        }
+      },
+      {
         "name": "allow_analyse",
         "type": "boolean",
         "ask": {

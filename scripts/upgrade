@@ -22,6 +22,7 @@ path_url=$(ynh_app_setting_get --app=$app --key=path)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 master_key=$(ynh_app_setting_get --app=$app --key=master_key)
 allow_analyse=$(ynh_app_setting_get --app=$app --key=allow_analyse)
+environment=$(ynh_app_setting_get --app=$app --key=environment)
 
 # Variables used for dumps
 DUMPS_DIR="$(mktemp -d -t meilisearch_dumps.XXXXX)"

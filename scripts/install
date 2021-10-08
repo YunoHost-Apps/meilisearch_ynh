@@ -29,6 +29,7 @@ path_url="/"
 is_public=$YNH_APP_ARG_IS_PUBLIC
 master_key=$YNH_APP_ARG_MASTER_KEY
 allow_analyse=$YNH_APP_ARG_ALLOW_ANALYSE
+environment=$YNH_APP_ARG_ENVIRONMENT
 
 app=$YNH_APP_INSTANCE_NAME
 

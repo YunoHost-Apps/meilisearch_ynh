@@ -7,7 +7,7 @@ Type=simple
 User=__APP__
 Group=__APP__
 WorkingDirectory=__FINALPATH__/
-ExecStart=/usr/bin/meilisearch --http-addr 127.0.0.1:__PORT__ --env production --master-key __MASTER_KEY__ --no-analytics __ANALYTICS__
+ExecStart=/usr/bin/meilisearch --http-addr 127.0.0.1:__PORT__ --env __ENVIRONMENT__ --master-key __MASTER_KEY__ --no-analytics __ANALYTICS__
 
 [Install]
 WantedBy=multi-user.target

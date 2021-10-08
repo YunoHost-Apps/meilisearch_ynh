@@ -44,4 +44,4 @@ Notification=none
 		manifest_arg=domain=DOMAIN&path=PATH&is_public=1&data_path=""&master_key="YUNOHOST-API-KEY-202020201456452135"&
 	; commit=adb788162e27a843d52582cb03106861e1b17c9c
 		name=From Version 0.15.0ynh~1 (Fixes #14)
-		manifest_arg=domain=DOMAIN&path=PATH&is_public=1&data_path=""&master_key="YUNOHOST-API-KEY-202020201456452135"&
+		manifest_arg=domain=DOMAIN&path=PATH&is_public=1&data_path=""&master_key="YUNOHOST-API-KEY-202020201456452135"&environment=development
