@@ -96,7 +96,8 @@ then
     do
         sleep 5
     done
-    cp $final_path/dumps/$dump_id.tar.gz $DUMPS_DIR
+    # Depending on the version, the dump extension can be either a .tar.gz or a .dump (both are actually .tar.gz files)
+    mv $final_path/dumps/$dump_id.* $DUMPS_DIR
     ynh_print_info --message="Dumping done!"
 fi
 
@@ -191,7 +192,7 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
     tmp_dump_logs="$(mktemp -p $DUMPS_DIR)"
     ynh_debug --message="Running import command"
-    /usr/bin/meilisearch --db-path $DUMPS_DIR/data.ms --import-dump $DUMPS_DIR/$dump_id.tar.gz --master-key $master_key --http-addr 127.0.0.1:$port --no-analytics true &> $tmp_dump_logs &
+    /usr/bin/meilisearch --db-path $DUMPS_DIR/data.ms --import-dump $DUMPS_DIR/$dump_id.* --master-key $master_key --http-addr 127.0.0.1:$port --no-analytics true &> $tmp_dump_logs &
     dump_pid=$!
     dump_timeout=300
     for i in $(seq $dump_timeout)
