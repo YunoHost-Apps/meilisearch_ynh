@@ -1,8 +1,22 @@
-;; Test name
+;; Meilisearch_ynh
 # Comment ignored
-	; pre-install
-		echo -n "Here your commands to execute in the container"
-		echo ", before each installation of the app."
+	; pre-upgrade
+		set -euxo pipefail
+		if [ "$FROM_COMMIT" == "adb788162e27a843d52582cb03106861e1b17c9c" ]
+		then
+			resolve=$SUBDOMAIN:443:127.0.0.1
+			api_key="X-Meili-API-Key: YUNOHOST-API-KEY-202020201456452135"
+			curl -k --silent --fail -X POST "https://$SUBDOMAIN/indexes" --data '{"uid": "test", "primaryKey": "id"}' --header "$api_key" --resolve "$resolve"
+			sleep 1
+			curl -k --silent --fail -X POST "https://$SUBDOMAIN/indexes/test/documents" --data '[{"id":"doc1","description":"foo"},{"id":"doc2","description":"foo2"}]' --header "$api_key" --resolve "$resolve"
+			sleep 1
+			nb_documents=$(curl -k --fail -X GET "https://$SUBDOMAIN/indexes/test/documents" --header "$api_key" --resolve "$resolve" | jq -r ". | length")
+			if [ "$nb_documents" -ne 2 ]
+			then
+				echo "Expected to have 2 documents"
+				exit 1
+			fi
+		fi
 	; Manifest
 		domain="domain.tld"
 		path="/path"
@@ -43,5 +57,5 @@ Notification=none
 		name=Merge pull request #13 from YunoHost-Apps/testing
 		manifest_arg=domain=DOMAIN&path=PATH&is_public=1&data_path=""&master_key="YUNOHOST-API-KEY-202020201456452135"&
 	; commit=adb788162e27a843d52582cb03106861e1b17c9c
-		name=From Version 0.15.0ynh~1 (Fixes #14)
+		name=Version 0.15.0ynh~1 (Fixes #14)
 		manifest_arg=domain=DOMAIN&path=PATH&is_public=1&data_path=""&master_key="YUNOHOST-API-KEY-202020201456452135"&environment=development
