@@ -17,7 +17,7 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 
 Meilisearch is an opensource next generation search API.
 
-**Version incluse :** 0.22.0~ynh1
+**Version incluse :** 0.30.5~ynh1
 
 ## Captures d’écran
 

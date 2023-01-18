@@ -17,7 +17,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 Meilisearch is an opensource next generation search API.
 
-**Shipped version:** 0.22.0~ynh1
+**Shipped version:** 0.30.5~ynh1
 
 ## Screenshots
 
