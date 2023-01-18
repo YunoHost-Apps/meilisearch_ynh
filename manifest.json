@@ -8,6 +8,11 @@
   },
   "version": "0.22.0~ynh1",
   "url": "https://www.meilisearch.com/",
+  "upstream": {
+        "license": "GPL-3.0",
+        "website": "https://www.meilisearch.com/",
+        "code": "https://github.com/meilisearch/MeiliSearch"
+    },
   "license": "GPL-3.0",
   "maintainer": {
     "name": "Julien Gomes Dias",
@@ -15,7 +20,7 @@
     "url": "https://julien.gomes-dias.dev"
   },
   "requirements": {
-    "yunohost": ">= 4.2.0"
+    "yunohost": ">= 11.0.9"
   },
   "multi_instance": true,
   "services": [

@@ -1,5 +1,5 @@
 [Unit]
-Description=Meilisearch: Lightning Fast Search Engine
+Description=Meilisearch: lightning Fast Search Engine
 After=systemd-user-sessions.service
 
 [Service]

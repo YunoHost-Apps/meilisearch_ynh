@@ -1,0 +1,1 @@
+Meilisearch is an opensource next generation search API.
