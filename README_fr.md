@@ -20,6 +20,8 @@ Un moteur de recherche open source, ultra-rapide et hyper pertinent qui s'intèg
 
 **Version incluse :** 1.1.0~ynh1
 
+**Démo :** https://where2watch.meilisearch.com/
+
 ## Captures d’écran
 
 ![Capture d’écran de MeiliSearch](./doc/screenshots/meilisearch.png)
