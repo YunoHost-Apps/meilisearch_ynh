@@ -57,6 +57,16 @@ ynh_use_logrotate --non-append
 yunohost service add $app --description="Opensource next generation search API" --log="/var/log/$app/$app.log"
 
 #=================================================
+# ADD A CONFIGURATION
+#=================================================
+ynh_script_progression --message="Adding a configuration file..." --weight=1
+
+ynh_add_config --template="../conf/config.toml" --destination="$install_dir/config.toml"
+
+chmod 400 "$install_dir/config.toml"
+chown $app:$app "$install_dir/config.toml"
+
+#=================================================
 # START SYSTEMD SERVICE
 #=================================================
 ynh_script_progression --message="Starting a systemd service..." --weight=3
