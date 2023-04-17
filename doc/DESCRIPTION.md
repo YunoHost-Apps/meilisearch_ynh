@@ -1,1 +1,1 @@
-Meilisearch is an opensource next generation search API.
+Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine

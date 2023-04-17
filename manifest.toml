@@ -1,0 +1,58 @@
+packaging_format = 2
+
+id = "meilisearch"
+name = "MeiliSearch"
+description.en = "Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine"
+description.fr = "Moteur de recherche rapide, ultra-performant et tolérant aux fautes de frappe"
+
+version = "1.1.0~ynh1"
+
+maintainers = ["Julien Gomes Dias"]
+
+[upstream]
+license = "MIT"
+website = "https://www.meilisearch.com/"
+demo = "https://where2watch.meilisearch.com/"
+admindoc = "https://www.meilisearch.com/docs"
+code = "https://github.com/meilisearch/meilisearch/"
+
+[integration]
+yunohost = ">= 11.1.17"
+architectures = ["amd64", "arm64"]
+multi_instance = true
+ldap = false
+sso = false
+disk = "50M"
+ram.build = "70M"
+ram.runtime = "50M"
+
+[install]
+    [install.domain]
+    type = "domain"
+    full_domain = true
+
+    [install.init_main_permission]
+    type = "group"
+    default = "visitors"
+
+[resources]
+
+    [resources.sources]
+
+        [resources.sources.main]
+        amd64.url = "https://github.com/meilisearch/meilisearch/releases/download/v1.1.0/meilisearch-linux-amd64"
+        amd64.sha256 = "41674391290246cbb4175289ded653e815aec32a6c91b4b090de1166a3adbb66"
+        arm64.url = "https://github.com/meilisearch/meilisearch/releases/download/v1.1.0/meilisearch-linux-aarch64"
+        arm64.sha256 = "b203d556078b805dc13f4252e434f119f96c651a1a3587d10caa163f5c125a3b"
+        rename = "meilisearch"
+        in_subdir = false
+        extract = false
+
+    [resources.ports]
+
+    [resources.system_user]
+
+    [resources.install_dir]
+
+    [resources.permissions]
+    main.url = "/"
