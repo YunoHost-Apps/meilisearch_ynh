@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # MeiliSearch for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/meilisearch.svg)](https://dash.yunohost.org/appci/app/meilisearch) ![Working status](https://ci-apps.yunohost.org/ci/badges/meilisearch.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/meilisearch.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/meilisearch.svg)](https://dash.yunohost.org/appci/app/meilisearch) ![Working status](https://ci-apps.yunohost.org/ci/badges/meilisearch.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/meilisearch.maintain.svg)
+
 [![Install MeiliSearch with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=meilisearch)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -15,13 +16,16 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 ## Overview
 
-Meilisearch is an opensource next generation search API.
+Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 
-**Shipped version:** 0.30.5~ynh1
+
+**Shipped version:** 1.1.0~ynh1
+
+**Demo:** https://where2watch.meilisearch.com/
 
 ## Screenshots
 
-![Screenshot of MeiliSearch](./doc/screenshots/movies-web-demo.gif)
+![Screenshot of MeiliSearch](./doc/screenshots/meilisearch.png)
 
 ## Disclaimers / important information
 
@@ -39,7 +43,8 @@ At the installation, be sure to set up an API key to secure your API.
 ## Documentation and resources
 
 * Official app website: <https://www.meilisearch.com/>
-* Upstream app code repository: <https://github.com/meilisearch/MeiliSearch>
+* Official admin documentation: <https://www.meilisearch.com/docs>
+* Upstream app code repository: <https://github.com/meilisearch/meilisearch/>
 * YunoHost documentation for this app: <https://yunohost.org/app_meilisearch>
 * Report a bug: <https://github.com/YunoHost-Apps/meilisearch_ynh/issues>
 

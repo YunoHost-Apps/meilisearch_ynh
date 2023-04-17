@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # MeiliSearch pour YunoHost
 
-[![Niveau d’intégration](https://dash.yunohost.org/integration/meilisearch.svg)](https://dash.yunohost.org/appci/app/meilisearch) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/meilisearch.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/meilisearch.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/meilisearch.svg)](https://dash.yunohost.org/appci/app/meilisearch) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/meilisearch.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/meilisearch.maintain.svg)
+
 [![Installer MeiliSearch avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=meilisearch)
 
 *[Read this readme in english.](./README.md)*
@@ -15,13 +16,15 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 
 ## Vue d’ensemble
 
-Meilisearch is an opensource next generation search API.
+Un moteur de recherche open source, ultra-rapide et hyper pertinent qui s'intègre sans effort à votre flux de travail.
 
-**Version incluse :** 0.30.5~ynh1
+**Version incluse :** 1.1.0~ynh1
+
+**Démo :** https://where2watch.meilisearch.com/
 
 ## Captures d’écran
 
-![Capture d’écran de MeiliSearch](./doc/screenshots/movies-web-demo.gif)
+![Capture d’écran de MeiliSearch](./doc/screenshots/meilisearch.png)
 
 ## Avertissements / informations importantes
 
@@ -39,7 +42,8 @@ At the installation, be sure to set up an API key to secure your API.
 ## Documentations et ressources
 
 * Site officiel de l’app : <https://www.meilisearch.com/>
-* Dépôt de code officiel de l’app : <https://github.com/meilisearch/MeiliSearch>
+* Documentation officielle de l’admin : <https://www.meilisearch.com/docs>
+* Dépôt de code officiel de l’app : <https://github.com/meilisearch/meilisearch/>
 * Documentation YunoHost pour cette app : <https://yunohost.org/app_meilisearch>
 * Signaler un bug : <https://github.com/YunoHost-Apps/meilisearch_ynh/issues>
 
