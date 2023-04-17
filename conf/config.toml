@@ -16,7 +16,7 @@ master_key = "__KEY__"
 # Sets the instance's master key, automatically protecting all routes except GET /health.
 # https://docs.meilisearch.com/learn/configuration/instance_options.html#master-key
 
-# no_analytics = true
+no_analytics = true
 # Deactivates Meilisearch's built-in telemetry when provided.
 # Meilisearch automatically collects data from all instances that do not opt out using this flag.
 # All gathered data is used solely for the purpose of improving Meilisearch, and can be deleted at any time.
