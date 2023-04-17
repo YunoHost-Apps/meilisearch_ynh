@@ -32,18 +32,6 @@ ram.runtime = "50M"
     type = "group"
     default = "visitors"
 
-    [install.master_key]
-    ask.en = "Choose a master API key for Meilisearch"
-    ask.fr = "Choisissez une clef d'API pour Meilisearch"
-    type = "string"
-    example = "API-key245678635248795"
-
-    [install.allow_analyse]
-    ask.en = "Allow Meilisearch to get data from usage of the application"
-    ask.fr = "Autoriser Meilisearch à analyser les données d'usage de l'application"
-    type = "boolean"
-    default = false
-
 [resources]
 
     [resources.sources]
