@@ -31,6 +31,8 @@ Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 ## Documentations et ressources
 
 * Site officiel de l’app : <https://www.meilisearch.com/>
+* Documentation officielle de l’admin : <https://www.meilisearch.com/docs>
+* Dépôt de code officiel de l’app : <https://github.com/meilisearch/meilisearch/>
 * Documentation YunoHost pour cette app : <https://yunohost.org/app_meilisearch>
 * Signaler un bug : <https://github.com/YunoHost-Apps/meilisearch_ynh/issues>
 
