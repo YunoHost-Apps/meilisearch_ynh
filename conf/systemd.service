@@ -7,7 +7,7 @@ Type=simple
 User=__APP__
 Group=__APP__
 WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__INSTALL_DIR__/meilisearch
+ExecStart=__INSTALL_DIR__/meilisearch --config-file-path __INSTALL_DIR__/config.toml
 
 [Install]
 WantedBy=multi-user.target
