@@ -22,7 +22,7 @@ Un moteur de recherche open source, ultra-rapide et hyper pertinent qui s'intèg
 
 ## Captures d’écran
 
-![Capture d’écran de MeiliSearch](./doc/screenshots/movies-web-demo.gif)
+![Capture d’écran de MeiliSearch](./doc/screenshots/meilisearch.png)
 
 ## :red_circle: Fonctions indésirables
 

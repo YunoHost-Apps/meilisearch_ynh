@@ -22,7 +22,7 @@ Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 
 ## Screenshots
 
-![Screenshot of MeiliSearch](./doc/screenshots/movies-web-demo.gif)
+![Screenshot of MeiliSearch](./doc/screenshots/meilisearch.png)
 
 ## :red_circle: Antifeatures
 
