@@ -18,6 +18,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 
+
 **Shipped version:** 1.1.0~ynh1
 
 **Demo:** https://where2watch.meilisearch.com/
@@ -26,6 +27,15 @@ Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 
 ![Screenshot of MeiliSearch](./doc/screenshots/meilisearch.png)
 
+## Disclaimers / important information
+
+## Configuration
+
+At the installation, be sure to set up an API key to secure your API.
+
+## Problem and todo
+
+- Doesn't install on subpath (WIP).
 ## :red_circle: Antifeatures
 
 - **Package not maintained**: This YunoHost package is not maintained and needs adoption.

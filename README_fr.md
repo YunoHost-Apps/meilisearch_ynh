@@ -26,6 +26,15 @@ Un moteur de recherche open source, ultra-rapide et hyper pertinent qui s'intèg
 
 ![Capture d’écran de MeiliSearch](./doc/screenshots/meilisearch.png)
 
+## Avertissements / informations importantes
+
+## Configuration
+
+At the installation, be sure to set up an API key to secure your API.
+
+## Problem and todo
+
+- Doesn't install on subpath (WIP).
 ## :red_circle: Fonctions indésirables
 
 - **Package not maintained**: This YunoHost package is not maintained and needs adoption.
