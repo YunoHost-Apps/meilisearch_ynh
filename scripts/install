@@ -9,6 +9,8 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
+key=$(ynh_string_random --length=16)
+
 #=================================================
 # DOWNLOAD AND INSTALL MEILISEARCH
 #=================================================
@@ -30,33 +32,25 @@ ynh_script_progression --message="Configuring NGINX web server..." --weight=8
 # Create a dedicated nginx config
 ynh_add_nginx_config
 
-#=================================================
-# SETUP SYSTEMD
-#=================================================
-ynh_script_progression --message="Configuring a systemd service..." --weight=2
-
-if [ $allow_analyse ]; then
-    ynh_replace_string "__ANALYTICS__" "false" "../conf/systemd.service"
-else
-    ynh_replace_string "__ANALYTICS__" "true" "../conf/systemd.service"
-fi
-
 # Create a dedicated systemd config
 ynh_add_systemd_config
-
-#=================================================
-# SETUP LOGROTATE
-#=================================================
-ynh_script_progression --message="Configuring log rotation..." --weight=1
 
 # Use logrotate to manage application logfile(s)
 ynh_use_logrotate
 
-#=================================================
-# INTEGRATE SERVICE IN YUNOHOST
-#=================================================
-
 yunohost service add $app --description="Opensource next generation search API" --log="/var/log/$app/$app.log"
+
+#=================================================
+# APP INITIAL CONFIGURATION
+#=================================================
+# ADD A CONFIGURATION
+#=================================================
+ynh_script_progression --message="Adding a configuration file..." --weight=1
+
+ynh_add_config --template="../conf/config.toml" --destination="$install_dir/config.toml"
+
+chmod 400 "$install_dir/config.toml"
+chown $app:$app "$install_dir/config.toml"
 
 #=================================================
 # START SYSTEMD SERVICE
