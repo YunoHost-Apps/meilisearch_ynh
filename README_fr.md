@@ -16,7 +16,7 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 
 ## Vue d’ensemble
 
-Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
+Un moteur de recherche open source, ultra-rapide et hyper pertinent qui s'intègre sans effort à votre flux de travail.
 
 **Version incluse :** 1.1.0~ynh1
 
