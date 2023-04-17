@@ -12,6 +12,7 @@ maintainers = ["Julien Gomes Dias"]
 [upstream]
 license = "MIT"
 website = "https://www.meilisearch.com/"
+demo = "https://where2watch.meilisearch.com/"
 admindoc = "https://www.meilisearch.com/docs"
 code = "https://github.com/meilisearch/meilisearch/"
 
