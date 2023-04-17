@@ -10,64 +10,10 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# LOAD SETTINGS
-#=================================================
-#REMOVEME? ynh_script_progression --message="Loading installation settings..." --weight=1
-
-#REMOVEME? app=$YNH_APP_INSTANCE_NAME
-
-#REMOVEME? domain=$(ynh_app_setting_get --app=$app --key=domain)
-#REMOVEME? path=$(ynh_app_setting_get --app=$app --key=path)
-#REMOVEME? #REMOVEME? install_dir=$(ynh_app_setting_get --app=$app --key=install_dir)
-#REMOVEME? master_key=$(ynh_app_setting_get --app=$app --key=master_key)
-#REMOVEME? allow_analyse=$(ynh_app_setting_get --app=$app --key=allow_analyse)
-
-#=================================================
 # CHECK VERSION
 #=================================================
 
 upgrade_type=$(ynh_check_app_version_changed)
-
-#=================================================
-# BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
-#=================================================
-ynh_script_progression --message="Backing up Meilisearch before upgrading (may take a while)..." --weight=5
-
-# Backup the current version of the app
-#REMOVEME? ynh_backup_before_upgrade
-#REMOVEME? ynh_clean_setup () {
-	# restore it if the upgrade fails
-#REMOVEME? 	ynh_restore_upgradebackup
-}
-# Exit if an error occurs during the execution of the script
-#REMOVEME? ynh_abort_if_errors
-
-#=================================================
-# ENSURE DOWNWARD COMPATIBILITY
-#=================================================
-ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
-
-# If install_dir doesn't exist, create it
-if [ -z "$install_dir" ]; then
-#REMOVEME? 	install_dir=/var/www/$app
-#REMOVEME? 	ynh_app_setting_set --app=$app --key=install_dir --value=$install_dir
-fi
-
-# Cleaning legacy permissions
-#REMOVEME? if ynh_legacy_permissions_exists; then
-#REMOVEME? 	ynh_legacy_permissions_delete_all
-
-	ynh_app_setting_delete --app=$app --key=is_public
-fi
-
-#=================================================
-# FIND AND OPEN A PORT
-#=================================================
-#REMOVEME? ynh_script_progression --message="Finding an available port.." --weight=2
-
-# Find an available port
-#REMOVEME? port=$(ynh_find_port --port=8095)
-#REMOVEME? ynh_app_setting_set --app=$app --key=port --value=$port
 
 #=================================================
 # STANDARD UPGRADE STEPS
@@ -87,40 +33,18 @@ ynh_script_progression --message="Upgrading NGINX web server configuration..." -
 ynh_add_nginx_config
 
 #=================================================
-# CREATE DEDICATED USER
-#=================================================
-#REMOVEME? ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
-
-# Create a dedicated user (if not existing)
-#REMOVEME? ynh_system_user_create --username=$app --home_dir="$install_dir"
-
-#=================================================
 # UPGRADING MEILISEARCH
 #=================================================
-ynh_script_progression --message="upgrading Meilisearch..." --weight=5
 
-arch=$(ynh_detect_arch)
-
-if [ "$arch" != "amd64" ] && [ "$arch" != "armv8" ]
+if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
-    ynh_die --message="Your OS Architecture is not supported"
+    ynh_script_progression --message="Upgrading source files..." --weight=1
+
+    # Download, check integrity, uncompress and patch the source from app.src
+    ynh_setup_source --dest_dir="$install_dir"
 fi
-release_file=meilisearch-linux-$arch
-curl -sOL https://github.com/meilisearch/MeiliSearch/releases/download/$latest/meilisearch-linux-$arch
-chmod +x "$release_file"
-mv "$release_file" /usr/bin/meilisearch
 
-chmod 750 "$install_dir"
-chmod -R o-rwx "$install_dir"
 chown -R $app:www-data "$install_dir"
-
-#=================================================
-# STORE THE CONFIG FILE CHECKSUM
-#=================================================
-
-ynh_backup_if_checksum_is_different --file="$install_dir/CONFIG_FILE"
-# Recalculate and store the checksum of the file for the next upgrade.
-ynh_store_file_checksum --file="$install_dir/CONFIG_FILE"
 
 #=================================================
 # SETUP SYSTEMD
@@ -156,13 +80,6 @@ yunohost service add $app --description="Opensource next generation search API" 
 ynh_script_progression --message="Starting a systemd service..." --weight=3
 
 ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
-
-#=================================================
-# RELOAD NGINX
-#=================================================
-#REMOVEME? ynh_script_progression --message="Reloading NGINX web server..." --weight=1
-
-#REMOVEME? ynh_systemd_action --service_name=nginx --action=reload
 
 #=================================================
 # END OF SCRIPT
