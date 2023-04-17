@@ -18,7 +18,7 @@ code = "https://github.com/meilisearch/meilisearch/"
 
 [integration]
 yunohost = ">= 11.1.17"
-architectures = "all"
+architectures = ["amd64", "arm64"]
 multi_instance = true
 ldap = false
 sso = false
