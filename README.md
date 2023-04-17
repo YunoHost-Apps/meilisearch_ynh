@@ -20,6 +20,8 @@ Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 
 **Shipped version:** 1.1.0~ynh1
 
+**Demo:** https://where2watch.meilisearch.com/
+
 ## Screenshots
 
 ![Screenshot of MeiliSearch](./doc/screenshots/meilisearch.png)
