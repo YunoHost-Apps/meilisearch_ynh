@@ -26,15 +26,6 @@ Un moteur de recherche open source, ultra-rapide et hyper pertinent qui s'intèg
 
 ![Capture d’écran de MeiliSearch](./doc/screenshots/meilisearch.png)
 
-## Avertissements / informations importantes
-
-## Configuration
-
-At the installation, be sure to set up an API key to secure your API.
-
-## Problem and todo
-
-- Doesn't install on subpath (WIP).
 ## Documentations et ressources
 
 * Site officiel de l’app : <https://www.meilisearch.com/>
