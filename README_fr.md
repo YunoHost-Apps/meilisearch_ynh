@@ -35,10 +35,6 @@ At the installation, be sure to set up an API key to secure your API.
 ## Problem and todo
 
 - Doesn't install on subpath (WIP).
-## :red_circle: Fonctions indésirables
-
-- **Package not maintained**: This YunoHost package is not maintained and needs adoption.
-
 ## Documentations et ressources
 
 * Site officiel de l’app : <https://www.meilisearch.com/>
