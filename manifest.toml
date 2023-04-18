@@ -47,6 +47,9 @@ ram.runtime = "50M"
         rename = "meilisearch"
         in_subdir = false
         extract = false
+        autoupdate.strategy = "latest_github_release"
+        autoupdate.asset.amd64 = "^meilisearch-linux-amd64$"
+        autoupdate.asset.arm64 = "^meilisearch-linux-aarch64$"
 
     [resources.ports]
 
