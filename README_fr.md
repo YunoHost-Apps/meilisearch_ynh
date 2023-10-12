@@ -18,7 +18,7 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 
 Un moteur de recherche open source, ultra-rapide et hyper pertinent qui s'intègre sans effort à votre flux de travail.
 
-**Version incluse :** 1.3.5~ynh1
+**Version incluse :** 1.4.1~ynh1
 
 **Démo :** https://where2watch.meilisearch.com/
 
@@ -31,7 +31,6 @@ Un moteur de recherche open source, ultra-rapide et hyper pertinent qui s'intèg
 * Site officiel de l’app : <https://www.meilisearch.com/>
 * Documentation officielle de l’admin : <https://www.meilisearch.com/docs>
 * Dépôt de code officiel de l’app : <https://github.com/meilisearch/meilisearch/>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_meilisearch>
 * Signaler un bug : <https://github.com/YunoHost-Apps/meilisearch_ynh/issues>
 
 ## Informations pour les développeurs
