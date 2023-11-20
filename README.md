@@ -19,7 +19,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 
 
-**Shipped version:** 1.4.2~ynh1
+**Shipped version:** 1.5.0~ynh1
 
 **Demo:** https://where2watch.meilisearch.com/
 
@@ -32,6 +32,7 @@ Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 * Official app website: <https://www.meilisearch.com/>
 * Official admin documentation: <https://www.meilisearch.com/docs>
 * Upstream app code repository: <https://github.com/meilisearch/meilisearch/>
+* YunoHost Store: <https://apps.yunohost.org/app/meilisearch>
 * Report a bug: <https://github.com/YunoHost-Apps/meilisearch_ynh/issues>
 
 ## Developer info
