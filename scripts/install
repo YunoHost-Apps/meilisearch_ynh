@@ -17,7 +17,6 @@ ynh_script_progression --message="Setting up source files..." --weight=1
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir="$install_dir"
 
-chmod 750 "$install_dir"
 chmod -R o-rwx "$install_dir"
 chown -R $app:www-data "$install_dir"
 chmod +x "$install_dir/meilisearch"
@@ -47,7 +46,7 @@ ynh_script_progression --message="Adding a configuration file..." --weight=1
 
 key=$(ynh_string_random --length=16)
 
-ynh_add_config --template="../conf/config.toml" --destination="$install_dir/config.toml"
+ynh_add_config --template="config.toml" --destination="$install_dir/config.toml"
 
 chmod 400 "$install_dir/config.toml"
 chown $app:$app "$install_dir/config.toml"
