@@ -18,7 +18,7 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 
 Un moteur de recherche open source, ultra-rapide et hyper pertinent qui s'intègre sans effort à votre flux de travail.
 
-**Version incluse :** 1.5.1~ynh1
+**Version incluse :** 1.6.1~ynh1
 
 **Démo :** https://where2watch.meilisearch.com/
 

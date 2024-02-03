@@ -67,7 +67,7 @@ ynh_script_progression --message="Adding a configuration file..." --weight=1
 
 key=$(ynh_string_random --length=16)
 
-ynh_add_config --template="../conf/config.toml" --destination="$install_dir/config.toml"
+ynh_add_config --template="config.toml" --destination="$install_dir/config.toml"
 
 chmod 400 "$install_dir/config.toml"
 chown $app:$app "$install_dir/config.toml"
