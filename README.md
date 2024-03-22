@@ -18,7 +18,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 
-**Shipped version:** 1.7.1~ynh1
+**Shipped version:** 1.7.3~ynh1
 
 **Demo:** <https://where2watch.meilisearch.com/>
 
