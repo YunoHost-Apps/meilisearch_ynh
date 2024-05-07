@@ -19,7 +19,7 @@ EZ editatu eskuz.
 Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 
 
-**Paketatutako bertsioa:** 1.7.6~ynh1
+**Paketatutako bertsioa:** 1.8.0~ynh1
 
 **Demoa:** <https://where2watch.meilisearch.com/>
 
