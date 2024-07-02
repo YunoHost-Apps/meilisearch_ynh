@@ -5,7 +5,7 @@
 
 # YunoHost 上的 MeiliSearch
 
-[![集成程度](https://dash.yunohost.org/integration/meilisearch.svg)](https://dash.yunohost.org/appci/app/meilisearch) ![工作状态](https://ci-apps.yunohost.org/ci/badges/meilisearch.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/meilisearch.maintain.svg)
+[![集成程度](https://dash.yunohost.org/integration/meilisearch.svg)](https://ci-apps.yunohost.org/ci/apps/meilisearch/) ![工作状态](https://ci-apps.yunohost.org/ci/badges/meilisearch.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/meilisearch.maintain.svg)
 
 [![使用 YunoHost 安装 MeiliSearch](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=meilisearch)
 
@@ -19,7 +19,7 @@
 Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 
 
-**分发版本：** 1.8.3~ynh1
+**分发版本：** 1.9.0~ynh1
 
 **演示：** <https://where2watch.meilisearch.com/>
 
