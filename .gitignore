@@ -1,2 +1,5 @@
 .idea
 .idea/*
+*~
+*.sw[op]
+.DS_Store
