@@ -3,12 +3,6 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
-if ynh_app_upgrading_from_version_before 1.1.0~ynh1; then
-  ynh_die "Please remove and reinstall Meilisearch"
-else
-
-fi
-
 #=================================================
 # STOP SYSTEMD SERVICE
 #=================================================
@@ -19,18 +13,10 @@ ynh_systemctl --service=$app --action="stop"
 #=================================================
 # UPGRADING MEILISEARCH
 #=================================================
+ynh_script_progression "Upgrading source files..."
 
-# FIXME: this is still supported but the recommendation is now to *always* re-setup the app sources wether or not the upstream sources changed
-if ynh_app_upstream_version_changed
-then
-    ynh_script_progression "Upgrading source files..."
+ynh_setup_source --dest_dir="$install_dir" --keep="$install_dir/config.toml"
 
-    # Download, check integrity, uncompress and patch the source from app.src
-    ynh_setup_source --dest_dir="$install_dir" --keep="$install_dir/config.toml"
-fi
-
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R o-rwx "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R $app:www-data "$install_dir"
 chmod +x "$install_dir/meilisearch"
 
 #=================================================
@@ -38,13 +24,10 @@ chmod +x "$install_dir/meilisearch"
 #=================================================
 ynh_script_progression "Configuring $app's systemd service..."
 
-# Create a dedicated NGINX config
 ynh_config_add_nginx
 
-# Create a dedicated systemd config
 ynh_config_add_systemd
 
-# Use logrotate to manage app-specific logfile(s)
 ynh_config_add_logrotate
 
 yunohost service add $app --description="Opensource next generation search API" --log="/var/log/$app/$app.log"
@@ -57,9 +40,6 @@ ynh_script_progression "Adding $app's configuration..."
 key=$(ynh_string_random --length=16)
 
 ynh_config_add --template="config.toml" --destination="$install_dir/config.toml"
-
-#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod 400 "$install_dir/config.toml"
-#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown $app:$app "$install_dir/config.toml"
 
 #=================================================
 # START SYSTEMD SERVICE

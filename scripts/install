@@ -8,11 +8,8 @@ source /usr/share/yunohost/helpers
 #=================================================
 ynh_script_progression "Setting up source files..."
 
-# Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir="$install_dir"
 
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R o-rwx "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R $app:www-data "$install_dir"
 chmod +x "$install_dir/meilisearch"
 
 #=================================================
@@ -20,13 +17,10 @@ chmod +x "$install_dir/meilisearch"
 #=================================================
 ynh_script_progression "Configuring NGINX web server..."
 
-# Create a dedicated nginx config
 ynh_config_add_nginx
 
-# Create a dedicated systemd config
 ynh_config_add_systemd
 
-# Use logrotate to manage application logfile(s)
 ynh_config_add_logrotate
 
 yunohost service add $app --description="Opensource next generation search API" --log="/var/log/$app/$app.log"
@@ -41,9 +35,6 @@ ynh_script_progression "Adding $app's configuration..."
 key=$(ynh_string_random --length=16)
 
 ynh_config_add --template="config.toml" --destination="$install_dir/config.toml"
-
-#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod 400 "$install_dir/config.toml"
-#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown $app:$app "$install_dir/config.toml"
 
 #=================================================
 # START SYSTEMD SERVICE
