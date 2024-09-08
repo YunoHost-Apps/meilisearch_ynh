@@ -26,8 +26,6 @@ ynh_config_add_logrotate
 yunohost service add $app --description="Opensource next generation search API" --log="/var/log/$app/$app.log"
 
 #=================================================
-# APP INITIAL CONFIGURATION
-#=================================================
 # ADD A CONFIGURATION
 #=================================================
 ynh_script_progression "Adding $app's configuration..."
