@@ -13,8 +13,6 @@ ynh_restore "$install_dir"
 #=================================================
 # SPECIFIC RESTORATION
 #=================================================
-# RESTORE SYSTEMD
-#=================================================
 ynh_script_progression "Restoring $app's systemd service..."
 
 ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
