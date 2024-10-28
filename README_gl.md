@@ -19,7 +19,7 @@ NON debe editarse manualmente.
 Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 
 
-**Versión proporcionada:** 1.10.2~ynh1
+**Versión proporcionada:** 1.11.0~ynh1
 
 **Demo:** <https://where2watch.meilisearch.com/>
 
