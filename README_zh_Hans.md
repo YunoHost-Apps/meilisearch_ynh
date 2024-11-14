@@ -19,7 +19,7 @@
 Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 
 
-**分发版本：** 1.11.1~ynh1
+**分发版本：** 1.11.3~ynh1
 
 **演示：** <https://where2watch.meilisearch.com/>
 
