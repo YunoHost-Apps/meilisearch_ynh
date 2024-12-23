@@ -5,7 +5,9 @@ EZ editatu eskuz.
 
 # MeiliSearch YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/meilisearch.svg)](https://ci-apps.yunohost.org/ci/apps/meilisearch/) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/meilisearch.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/meilisearch.maintain.svg)
+[![Integrazio maila](https://apps.yunohost.org/badge/integration/meilisearch)](https://ci-apps.yunohost.org/ci/apps/meilisearch/)
+![Funtzionamendu egoera](https://apps.yunohost.org/badge/state/meilisearch)
+![Mantentze egoera](https://apps.yunohost.org/badge/maintained/meilisearch)
 
 [![Instalatu MeiliSearch YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=meilisearch)
 
@@ -19,7 +21,7 @@ EZ editatu eskuz.
 Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 
 
-**Paketatutako bertsioa:** 1.11.3~ynh1
+**Paketatutako bertsioa:** 1.12.0~ynh1
 
 **Demoa:** <https://where2watch.meilisearch.com/>
 

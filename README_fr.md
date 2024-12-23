@@ -5,7 +5,9 @@ Il NE doit PAS être modifié à la main.
 
 # MeiliSearch pour YunoHost
 
-[![Niveau d’intégration](https://dash.yunohost.org/integration/meilisearch.svg)](https://ci-apps.yunohost.org/ci/apps/meilisearch/) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/meilisearch.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/meilisearch.maintain.svg)
+[![Niveau d’intégration](https://apps.yunohost.org/badge/integration/meilisearch)](https://ci-apps.yunohost.org/ci/apps/meilisearch/)
+![Statut du fonctionnement](https://apps.yunohost.org/badge/state/meilisearch)
+![Statut de maintenance](https://apps.yunohost.org/badge/maintained/meilisearch)
 
 [![Installer MeiliSearch avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=meilisearch)
 
@@ -18,7 +20,7 @@ Il NE doit PAS être modifié à la main.
 
 Un moteur de recherche open source, ultra-rapide et hyper pertinent qui s'intègre sans effort à votre flux de travail.
 
-**Version incluse :** 1.11.3~ynh1
+**Version incluse :** 1.12.0~ynh1
 
 **Démo :** <https://where2watch.meilisearch.com/>
 
