@@ -5,7 +5,9 @@ No se debe editar a mano.
 
 # MeiliSearch para Yunohost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/meilisearch.svg)](https://ci-apps.yunohost.org/ci/apps/meilisearch/) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/meilisearch.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/meilisearch.maintain.svg)
+[![Nivel de integración](https://apps.yunohost.org/badge/integration/meilisearch)](https://ci-apps.yunohost.org/ci/apps/meilisearch/)
+![Estado funcional](https://apps.yunohost.org/badge/state/meilisearch)
+![Estado En Mantención](https://apps.yunohost.org/badge/maintained/meilisearch)
 
 [![Instalar MeiliSearch con Yunhost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=meilisearch)
 
@@ -19,7 +21,7 @@ No se debe editar a mano.
 Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 
 
-**Versión actual:** 1.11.3~ynh1
+**Versión actual:** 1.12.0~ynh1
 
 **Demo:** <https://where2watch.meilisearch.com/>
 
