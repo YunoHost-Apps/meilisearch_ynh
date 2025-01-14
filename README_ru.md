@@ -21,7 +21,7 @@
 Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 
 
-**Поставляемая версия:** 1.12.2~ynh1
+**Поставляемая версия:** 1.12.3~ynh1
 
 **Демо-версия:** <https://where2watch.meilisearch.com/>
 
