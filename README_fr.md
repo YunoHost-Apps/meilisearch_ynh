@@ -20,7 +20,7 @@ Il NE doit PAS être modifié à la main.
 
 Un moteur de recherche open source, ultra-rapide et hyper pertinent qui s'intègre sans effort à votre flux de travail.
 
-**Version incluse :** 1.12.3~ynh1
+**Version incluse :** 1.12.4~ynh1
 
 **Démo :** <https://where2watch.meilisearch.com/>
 
