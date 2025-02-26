@@ -21,7 +21,7 @@ Ini TIDAK boleh diedit dengan tangan.
 Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine
 
 
-**Versi terkirim:** 1.13.0~ynh1
+**Versi terkirim:** 1.13.1~ynh1
 
 **Demo:** <https://where2watch.meilisearch.com/>
 
