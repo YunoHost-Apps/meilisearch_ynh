@@ -7,11 +7,11 @@ Type=simple
 User=__APP__
 Group=__APP__
 WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__INSTALL_DIR__/meilisearch --config-file-path __INSTALL_DIR__/config.toml
+ExecStart=__INSTALL_DIR__/meilisearch --config-file-path __INSTALL_DIR__/config.toml --experimental-dumpless-upgrade
+StandardOutput=append:/var/log/__APP__/__APP__.log
+StandardError=inherit
 
 # Sandboxing options to harden security
-# Depending on specificities of your service/app, you may need to tweak these
-# .. but this should be a good baseline
 # Details for these options: https://www.freedesktop.org/software/systemd/man/systemd.exec.html
 NoNewPrivileges=yes
 PrivateTmp=yes
