@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+
 source _common.sh
 source /usr/share/yunohost/helpers
 
@@ -8,48 +12,57 @@ source /usr/share/yunohost/helpers
 #=================================================
 ynh_script_progression "Stopping $app's systemd service..."
 
-ynh_systemctl --service=$app --action="stop"
+ynh_systemctl --service="$app" --action="stop"
 
 #=================================================
-# UPGRADING MEILISEARCH
+# ENSURE DOWNWARD COMPATIBILITY
+#=================================================
+ynh_script_progression "Ensuring downward compatibility..."
+
+if [ -z "${key:-}" ]
+then
+	key=$(ynh_string_random --length=16)
+	ynh_app_setting_set --key="key" --value="$key"
+fi
+
+#=================================================
+# DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression "Upgrading source files..."
 
-ynh_setup_source --dest_dir="$install_dir" --keep="config.toml"
+# Download, check integrity, uncompress and patch the source from manifest.toml
+ynh_setup_source --dest_dir="$install_dir" --full_replace --keep="config.toml data.ms/"
 
 chmod +x "$install_dir/meilisearch"
 
 #=================================================
-# SETUP SYSTEMD
+# UPDATE A CONFIG FILE
 #=================================================
-ynh_script_progression "Configuring $app's systemd service..."
+ynh_script_progression "Updating $app's configuration files..."
+
+ynh_config_add --template="config.toml" --destination="$install_dir/config.toml"
+
+#=================================================
+# REAPPLY SYSTEM CONFIGURATIONS
+#=================================================
+ynh_script_progression "Upgrading system configurations related to $app..."
 
 ynh_config_add_nginx
 
 ynh_config_add_systemd
+yunohost service add "$app" --description="Opensource next generation search API" --log="/var/log/$app/$app.log"
 
 ynh_config_add_logrotate
-
-yunohost service add $app --description="Opensource next generation search API" --log="/var/log/$app/$app.log"
-
-#=================================================
-# ADD A CONFIGURATION
-#=================================================
-ynh_script_progression "Adding $app's configuration..."
-
-key=$(ynh_string_random --length=16)
-
-ynh_config_add --template="config.toml" --destination="$install_dir/config.toml"
 
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
 
-ynh_systemctl --service=$app --action="start"
+ynh_systemctl --service="$app" --action="start" --wait_until="starting in Actix runtime" --log_path="/var/log/$app/$app.log"
 
 #=================================================
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression "Upgrade of Meilisearch completed"
+ynh_script_progression "Upgrade of $app completed"

@@ -1,3 +1,5 @@
+#:schema https://raw.githubusercontent.com/YunoHost/apps/master/schemas/manifest.v2.schema.json
+
 packaging_format = 2
 
 id = "meilisearch"
@@ -23,6 +25,7 @@ architectures = ["amd64", "arm64"]
 multi_instance = true
 
 ldap = false
+
 sso = false
 
 disk = "50M"
@@ -41,19 +44,17 @@ ram.runtime = "50M"
 
     [resources.sources]
 
-        [resources.sources.main]
-        amd64.url = "https://github.com/meilisearch/meilisearch/releases/download/v1.13.2/meilisearch-linux-amd64"
-        amd64.sha256 = "9a5620df60bf9fb0d13efdcad5433085587eb09b57223c23ee4dd0292693d29b"
-        arm64.url = "https://github.com/meilisearch/meilisearch/releases/download/v1.13.2/meilisearch-linux-aarch64"
-        arm64.sha256 = "5767aed2e6e730558b9b5a0eeeb5aace39c51bad2569185ee331fa1457276289"
-        rename = "meilisearch"
-        in_subdir = false
-        extract = false
-        autoupdate.strategy = "latest_github_release"
-        autoupdate.asset.amd64 = "^meilisearch-linux-amd64$"
-        autoupdate.asset.arm64 = "^meilisearch-linux-aarch64$"
-
-    [resources.ports]
+    [resources.sources.main]
+    amd64.url = "https://github.com/meilisearch/meilisearch/releases/download/v1.13.2/meilisearch-linux-amd64"
+    amd64.sha256 = "9a5620df60bf9fb0d13efdcad5433085587eb09b57223c23ee4dd0292693d29b"
+    arm64.url = "https://github.com/meilisearch/meilisearch/releases/download/v1.13.2/meilisearch-linux-aarch64"
+    arm64.sha256 = "5767aed2e6e730558b9b5a0eeeb5aace39c51bad2569185ee331fa1457276289"
+    rename = "meilisearch"
+    in_subdir = false
+    extract = false
+    autoupdate.strategy = "latest_github_release"
+    autoupdate.asset.amd64 = "^meilisearch-linux-amd64$"
+    autoupdate.asset.arm64 = "^meilisearch-linux-aarch64$"
 
     [resources.system_user]
 
@@ -62,3 +63,5 @@ ram.runtime = "50M"
 
     [resources.permissions]
     main.url = "/"
+
+    [resources.ports]
