@@ -7,7 +7,7 @@ name = "MeiliSearch"
 description.en = "Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine"
 description.fr = "Moteur de recherche rapide, ultra-performant et tolérant aux fautes de frappe"
 
-version = "1.23.0~ynh1"
+version = "1.24.0~ynh1"
 
 maintainers = ["Julien Gomes Dias"]
 
@@ -44,10 +44,10 @@ ram.runtime = "50M"
     [resources.sources]
 
     [resources.sources.main]
-    amd64.url = "https://github.com/meilisearch/meilisearch/releases/download/v1.23.0/meilisearch-linux-amd64"
-    amd64.sha256 = "4933ef75f2c80e7600521eb5156ea89ad7ecb79de11995d68e3e3b5ff8903f31"
-    arm64.url = "https://github.com/meilisearch/meilisearch/releases/download/v1.23.0/meilisearch-linux-aarch64"
-    arm64.sha256 = "0a0399a17deb68544792b9269d33689b3e41f4f901c8e7ba0a05c4751c480b2a"
+    amd64.url = "https://github.com/meilisearch/meilisearch/releases/download/v1.24.0/meilisearch-linux-amd64"
+    amd64.sha256 = "f7497548f0ad25281c0bb75db2330bc87f440341ab82f25aecec0318ec02ddc7"
+    arm64.url = "https://github.com/meilisearch/meilisearch/releases/download/v1.24.0/meilisearch-linux-aarch64"
+    arm64.sha256 = "e2bda6df9a217e5fbcdc85629ad6cfe2c6a03b42536891118a5dde41087b9a97"
     rename = "meilisearch"
     in_subdir = false
     extract = false
