@@ -19,7 +19,7 @@ admindoc = "https://www.meilisearch.com/docs"
 code = "https://github.com/meilisearch/meilisearch/"
 
 [integration]
-yunohost = ">= 12.1.17"
+yunohost = ">= 12.1.38"
 helpers_version = "2.1"
 architectures = ["amd64", "arm64"]
 multi_instance = true
