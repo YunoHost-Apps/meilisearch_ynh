@@ -45,7 +45,6 @@ yunohost service add "$app" --description="Opensource next generation search API
 # Use logrotate to manage application logfile(s)
 ynh_config_add_logrotate
 
-
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
