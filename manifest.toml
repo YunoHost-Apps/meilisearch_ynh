@@ -9,7 +9,7 @@ description.fr = "Moteur de recherche rapide, ultra-performant et tolérant aux 
 
 version = "1.54.0~ynh1"
 
-maintainers = ["Julien Gomes Dias"]
+maintainers = [ ]
 
 [upstream]
 license = "MIT"
@@ -19,7 +19,7 @@ admindoc = "https://www.meilisearch.com/docs"
 code = "https://github.com/meilisearch/meilisearch/"
 
 [integration]
-yunohost = ">= 12.1.38"
+yunohost = ">= 12.1.40"
 helpers_version = "2.1"
 architectures = ["amd64", "arm64"]
 multi_instance = true
